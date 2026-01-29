@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/onboarding/onboarding_bloc.dart';
+import 'one_clinic_sign_in_page.dart';
 
 class OneClinicMainPage extends StatelessWidget {
   const OneClinicMainPage({super.key});
@@ -277,8 +278,39 @@ class OneClinicMainPage extends StatelessWidget {
                               ).withValues(alpha: 0.4),
                             ),
                             onPressed: () {
-                              context.read<OnboardingBloc>().add(
-                                const NavigateToSignInEvent(),
+                              Navigator.of(context).push(
+                                PageRouteBuilder(
+                                  pageBuilder:
+                                      (
+                                        context,
+                                        animation,
+                                        secondaryAnimation,
+                                      ) => const OneClinicSignInPage(),
+                                  transitionsBuilder:
+                                      (
+                                        context,
+                                        animation,
+                                        secondaryAnimation,
+                                        child,
+                                      ) {
+                                        const begin = Offset(1.0, 0.0);
+                                        const end = Offset.zero;
+                                        const curve = Curves.easeInOut;
+
+                                        var tween = Tween(
+                                          begin: begin,
+                                          end: end,
+                                        ).chain(CurveTween(curve: curve));
+
+                                        return SlideTransition(
+                                          position: animation.drive(tween),
+                                          child: child,
+                                        );
+                                      },
+                                  transitionDuration: const Duration(
+                                    milliseconds: 400,
+                                  ),
+                                ),
                               );
                             },
                             child: const Text(
