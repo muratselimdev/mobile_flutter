@@ -111,6 +111,36 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       ),
     ];
 
+    final popularServices = const <_PopularService>[
+      _PopularService(
+        title: 'Lazer Göz Ameliyatı (LASIK)',
+        provider: 'Dünya Göz Hastanesi',
+        rating: 4.8,
+        reviews: 85,
+        price: '3.000€',
+        imageUrl:
+            'https://images.unsplash.com/photo-1580281658629-0ffb0b7d45a1?auto=format&fit=crop&w=240&q=80',
+      ),
+      _PopularService(
+        title: 'Rinoplasti (Burun Estetiği)',
+        provider: 'Estetik International',
+        rating: 4.8,
+        reviews: 85,
+        price: '3.000€',
+        imageUrl:
+            'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=240&q=80',
+      ),
+      _PopularService(
+        title: 'Zirkonyum Kaplama',
+        provider: 'DentGroup İzmir',
+        rating: 5.0,
+        reviews: 210,
+        price: '2.500€',
+        imageUrl:
+            'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=240&q=80',
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
@@ -338,6 +368,17 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                 },
               ),
             ),
+            const SizedBox(height: 24),
+            const Text(
+              'Popüler Hizmetler',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 12),
+            Column(
+              children: popularServices
+                  .map((service) => _PopularServiceCard(service: service))
+                  .toList(),
+            ),
           ],
         ),
       ),
@@ -374,6 +415,24 @@ class _Category {
     required this.name,
     required this.icon,
     required this.items,
+  });
+}
+
+class _PopularService {
+  final String title;
+  final String provider;
+  final double rating;
+  final int reviews;
+  final String price;
+  final String imageUrl;
+
+  const _PopularService({
+    required this.title,
+    required this.provider,
+    required this.rating,
+    required this.reviews,
+    required this.price,
+    required this.imageUrl,
   });
 }
 
@@ -429,6 +488,135 @@ class _OfferCard extends StatelessWidget {
           Text(
             item.location,
             style: const TextStyle(color: Colors.black54, fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PopularServiceCard extends StatelessWidget {
+  final _PopularService service;
+
+  const _PopularServiceCard({required this.service});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              service.imageUrl,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 80,
+                  height: 80,
+                  color: Colors.grey[200],
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    color: Colors.grey,
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        service.title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.favorite_border,
+                      size: 18,
+                      color: Colors.black38,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.verified,
+                      size: 14,
+                      color: Color(0xFF16A34A),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        service.provider,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.black54,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${service.rating}',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '(${service.reviews})',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      service.price,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF16A34A),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
