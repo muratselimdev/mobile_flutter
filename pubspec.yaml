@@ -38,6 +38,7 @@ dependencies:
   bloc: ^8.1.1
   equatable: ^2.0.5
   google_fonts: ^6.2.1
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
