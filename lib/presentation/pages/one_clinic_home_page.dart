@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_footer.dart';
 
 class OneClinicHomePage extends StatefulWidget {
   const OneClinicHomePage({super.key});
@@ -10,6 +11,7 @@ class OneClinicHomePage extends StatefulWidget {
 class _OneClinicHomePageState extends State<OneClinicHomePage> {
   int _selectedCategoryIndex = 0;
   bool _isDropdownExpanded = true;
+  int _currentTabIndex = 0;
 
   final categories = const <_Category>[
     _Category(
@@ -338,6 +340,14 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: AppFooter(
+        currentIndex: _currentTabIndex,
+        onTap: (index) {
+          setState(() {
+            _currentTabIndex = index;
+          });
+        },
       ),
     );
   }
