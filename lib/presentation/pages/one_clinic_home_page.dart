@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_footer.dart';
+import 'one_clinic_profile_page.dart';
 
 class OneClinicHomePage extends StatefulWidget {
   const OneClinicHomePage({super.key});
@@ -385,9 +386,19 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       bottomNavigationBar: AppFooter(
         currentIndex: _currentTabIndex,
         onTap: (index) {
-          setState(() {
-            _currentTabIndex = index;
-          });
+          if (index == 3) {
+            // Navigate to Profile page
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const OneClinicProfilePage(),
+              ),
+            );
+          } else {
+            setState(() {
+              _currentTabIndex = index;
+            });
+          }
         },
       ),
     );
