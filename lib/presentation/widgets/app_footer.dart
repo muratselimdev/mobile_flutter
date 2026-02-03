@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../localization/app_localizations.dart';
 
 class AppFooter extends StatelessWidget {
   final int currentIndex;
@@ -15,19 +16,22 @@ class AppFooter extends StatelessWidget {
       selectedItemColor: const Color(0xFF16A34A),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
-          label: 'One Clinic',
-        ),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Ara'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_month),
-          label: 'Randevular',
+          icon: const Icon(Icons.home_filled),
+          label: context.loc.t('footer.home'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          label: 'Profil',
+          icon: const Icon(Icons.search),
+          label: context.loc.t('footer.search'),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.calendar_month),
+          label: context.loc.t('footer.appointments'),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.person_outline),
+          label: context.loc.t('footer.profile'),
         ),
       ],
     );

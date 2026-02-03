@@ -24,13 +24,13 @@ class AuthService {
         final errorBody = jsonDecode(response.body);
         return LoginResponse(
           success: false,
-          message: errorBody['message'] ?? 'Login failed',
+          message: errorBody['message']?.toString(),
         );
       }
     } catch (e) {
       return LoginResponse(
         success: false,
-        message: 'Network error: ${e.toString()}',
+        message: null,
       );
     }
   }

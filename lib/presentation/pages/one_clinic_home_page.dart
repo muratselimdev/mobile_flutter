@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../localization/app_localizations.dart';
 import '../widgets/app_footer.dart';
 import 'one_clinic_profile_page.dart';
 
@@ -14,142 +15,75 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   bool _isDropdownExpanded = true;
   int _currentTabIndex = 0;
 
-  final categories = const <_Category>[
-    _Category(
-      name: 'Tümü',
-      icon: Icons.dashboard_outlined,
-      items: [
-        'Bariatrik Cerrahi',
-        'Diş Hekimliği',
-        'Diyabet Tedavisi',
-        'Göz Cerrahisi',
-        'Saç Ekimi',
-        'Cilt Estetik',
-        'Kardiyoloji',
-        'Ortopedi',
-      ],
-    ),
-    _Category(
-      name: 'Saç Ekimi',
-      icon: Icons.content_cut_outlined,
-      items: [
-        'Full Paket Saç Ekimi',
-        'Saç Ekimi (500 Graft)',
-        'Saç Ekimi (1000 Graft)',
-        'Saç Transplantasyonu',
-        'Saç Yoğunlaştırma',
-        'Saç Tasarımı',
-      ],
-    ),
-    _Category(
-      name: 'Diş Estetik',
-      icon: Icons.favorite_outline,
-      items: [
-        'Diş Beyazlatma',
-        'Diş Hekimliği',
-        'Ağız ve Diş Sağlığı',
-        'Protez Diş',
-        'Implant Diş',
-        'Ortodonti',
-        'Porselen Veneer',
-      ],
-    ),
-    _Category(
-      name: 'Cilt Estetik',
-      icon: Icons.spa_outlined,
-      items: [
-        'Botoks Tedavisi',
-        'Dolgu Işlemi',
-        'Lazer Cilt Tedavisi',
-        'Microdermabrasion',
-        'Peeling Tedavisi',
-        'Akne Tedavisi',
-      ],
-    ),
-    _Category(
-      name: 'Göz Cerrahisi',
-      icon: Icons.visibility_outlined,
-      items: [
-        'LASIK Operasyonu',
-        'Göz Cerrahisi',
-        'Katarakt Operasyonu',
-        'Gözlük Olmadan Görüş',
-        'Miyopi Tedavisi',
-        'Hipermetropi Tedavisi',
-      ],
-    ),
-    _Category(
-      name: 'Ortopedi',
-      icon: Icons.directions_walk_outlined,
-      items: [
-        'Kemik Erimesi',
-        'Eklem Ağrısı',
-        'Omuz Operasyonu',
-        'Diz Operasyonu',
-        'Çıkık Tedavisi',
-        'Protez Uygulaması',
-      ],
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final offers = const <_OfferItem>[
-      _OfferItem(
-        badge: '%20 indirim',
-        title: 'Full Paket Saç Ekimi',
-        location: 'Şişli, İstanbul',
+    final loc = context.loc;
+
+    final categories = <_Category>[
+      _Category(
+        name: loc.t('categories.names.all'),
+        icon: Icons.dashboard_outlined,
+        items: loc.list('categories.items.all'),
       ),
-      _OfferItem(
-        badge: '%15 indirim',
-        title: 'Saç Ekimi',
-        location: 'Kadıköy, İstanbul',
+      _Category(
+        name: loc.t('categories.names.hairTransplant'),
+        icon: Icons.content_cut_outlined,
+        items: loc.list('categories.items.hairTransplant'),
       ),
-      _OfferItem(
-        badge: '%10 indirim',
-        title: 'Diş Estetiği Paketi',
-        location: 'Beşiktaş, İstanbul',
+      _Category(
+        name: loc.t('categories.names.dentalAesthetic'),
+        icon: Icons.favorite_outline,
+        items: loc.list('categories.items.dentalAesthetic'),
+      ),
+      _Category(
+        name: loc.t('categories.names.skinAesthetic'),
+        icon: Icons.spa_outlined,
+        items: loc.list('categories.items.skinAesthetic'),
+      ),
+      _Category(
+        name: loc.t('categories.names.eyeSurgery'),
+        icon: Icons.visibility_outlined,
+        items: loc.list('categories.items.eyeSurgery'),
+      ),
+      _Category(
+        name: loc.t('categories.names.orthopedics'),
+        icon: Icons.directions_walk_outlined,
+        items: loc.list('categories.items.orthopedics'),
       ),
     ];
 
-    final popularServices = const <_PopularService>[
-      _PopularService(
-        title: 'Lazer Göz Ameliyatı (LASIK)',
-        provider: 'Dünya Göz Hastanesi',
+    final offers = loc.mapList('offers.items').map((item) {
+      return _OfferItem(
+        badge: item['badge']?.toString() ?? '',
+        title: item['title']?.toString() ?? '',
+        location: item['location']?.toString() ?? '',
+      );
+    }).toList();
+
+    final popularServices = loc.mapList('popularServices.items').map((item) {
+      return _PopularService(
+        title: item['title']?.toString() ?? '',
+        provider: item['provider']?.toString() ?? '',
         rating: 4.8,
         reviews: 85,
-        price: '3.000€',
+        price: item['price']?.toString() ?? '',
         imageUrl:
-            'https://images.unsplash.com/photo-1580281658629-0ffb0b7d45a1?auto=format&fit=crop&w=240&q=80',
-      ),
-      _PopularService(
-        title: 'Rinoplasti (Burun Estetiği)',
-        provider: 'Estetik International',
-        rating: 4.8,
-        reviews: 85,
-        price: '3.000€',
-        imageUrl:
-            'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=240&q=80',
-      ),
-      _PopularService(
-        title: 'Zirkonyum Kaplama',
-        provider: 'DentGroup İzmir',
-        rating: 5.0,
-        reviews: 210,
-        price: '2.500€',
-        imageUrl:
+            item['imageUrl']?.toString() ??
             'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=240&q=80',
-      ),
-    ];
+      );
+    }).toList();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          'One Clinic',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+        title: Text(
+          loc.t('app.name'),
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         actions: [
           IconButton(
@@ -181,34 +115,34 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.black12),
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on_outlined,
                         size: 16,
                         color: Colors.black54,
                       ),
-                      SizedBox(width: 6),
-                      Text('İstanbul, TR'),
+                      const SizedBox(width: 6),
+                      Text(loc.t('home.location')),
                     ],
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Merhaba!',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            Text(
+              loc.t('home.greeting'),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'One Clinic ile sağlıklı bir gelecek.',
-              style: TextStyle(color: Colors.black54),
+            Text(
+              loc.t('home.tagline'),
+              style: const TextStyle(color: Colors.black54),
             ),
             const SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
-                hintText: 'Tedavi, klinik veya şehir ara...',
+                hintText: loc.t('home.searchHint'),
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
                 fillColor: Colors.white,
@@ -352,9 +286,9 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
               ),
               const SizedBox(height: 24),
             ],
-            const Text(
-              'One Clinic Fırsatları',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Text(
+              loc.t('home.offersTitle'),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             SizedBox(
@@ -370,9 +304,9 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Popüler Hizmetler',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Text(
+              loc.t('home.popularTitle'),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             Column(

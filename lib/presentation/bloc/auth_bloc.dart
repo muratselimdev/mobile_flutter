@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(
           state.copyWith(
             status: AuthStatus.error,
-            errorMessage: response.message ?? 'Login failed',
+            errorMessage: response.message,
           ),
         );
       }
@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(
         state.copyWith(
           status: AuthStatus.error,
-          errorMessage: 'An error occurred: ${e.toString()}',
+          errorMessage: null,
         ),
       );
     }

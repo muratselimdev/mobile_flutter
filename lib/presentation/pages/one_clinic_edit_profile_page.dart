@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../localization/app_localizations.dart';
 
 class OneClinicEditProfilePage extends StatefulWidget {
   const OneClinicEditProfilePage({super.key});
@@ -40,16 +41,16 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
         title: Column(
           children: [
             Text(
-              'ONE CLİNİC',
+              context.loc.t('app.brandUpper'),
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF16A34A),
               ),
             ),
-            const Text(
-              'Profili Düzenle',
-              style: TextStyle(
+            Text(
+              context.loc.t('editProfile.title'),
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -80,9 +81,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                 ),
                 child: Column(
                   children: [
-                    const Text(
-                      'Profil Resmi',
-                      style: TextStyle(
+                    Text(
+                      context.loc.t('editProfile.profilePhoto'),
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -113,9 +114,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                             onTap: () {
                               // TODO: Implement image picker
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                                SnackBar(
                                   content: Text(
-                                    'Image picker not yet implemented',
+                                    context.loc.t('editProfile.snackbarImagePicker'),
                                   ),
                                 ),
                               );
@@ -143,7 +144,7 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Resmi değiştirmek için tıklayın',
+                      context.loc.t('editProfile.changePhotoHint'),
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                     ),
                   ],
@@ -168,9 +169,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'E-mail adresimi',
-                      style: TextStyle(
+                    Text(
+                      context.loc.t('editProfile.emailSectionTitle'),
+                      style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -181,7 +182,7 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        hintText: 'E-mail adresinizi girin',
+                        hintText: context.loc.t('editProfile.emailHint'),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -214,9 +215,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Telefon numaramı',
-                      style: TextStyle(
+                    Text(
+                      context.loc.t('editProfile.phoneSectionTitle'),
+                      style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -227,7 +228,7 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
-                        hintText: 'Telefon numaranızı girin',
+                        hintText: context.loc.t('editProfile.phoneHint'),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -261,9 +262,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      child: const Text(
-                        'İptal',
-                        style: TextStyle(
+                      child: Text(
+                        context.loc.t('editProfile.cancelButton'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                           color: Colors.black87,
@@ -280,9 +281,11 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                       onPressed: () {
                         // TODO: Submit the changes
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Profil başarıyla güncellendi!'),
-                            backgroundColor: Color(0xFF16A34A),
+                          SnackBar(
+                            content: Text(
+                              context.loc.t('editProfile.snackbarProfileUpdated'),
+                            ),
+                            backgroundColor: const Color(0xFF16A34A),
                           ),
                         );
                         Navigator.pop(context);
@@ -294,9 +297,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                         ),
                         elevation: 4,
                       ),
-                      child: const Text(
-                        'Kaydet',
-                        style: TextStyle(
+                      child: Text(
+                        context.loc.t('editProfile.saveButton'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,

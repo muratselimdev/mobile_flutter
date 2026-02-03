@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/services/auth_service.dart';
+import '../bloc/app_language_cubit.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
+import '../localization/app_localizations.dart';
 import 'one_clinic_home_page.dart';
 
 class OneClinicSignInPage extends StatefulWidget {
@@ -34,9 +36,9 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
           listener: (context, state) {
             if (state.status == AuthStatus.authenticated) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Login successful!'),
-                  backgroundColor: Color(0xFF16A34A),
+                SnackBar(
+                  content: Text(context.loc.t('signIn.loginSuccess')),
+                  backgroundColor: const Color(0xFF16A34A),
                 ),
               );
               Navigator.pushReplacement(
@@ -46,7 +48,9 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
             } else if (state.status == AuthStatus.error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(state.errorMessage ?? 'Login failed'),
+                  content: Text(
+                    state.errorMessage ?? context.loc.t('signIn.loginFailed'),
+                  ),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -113,40 +117,51 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                   ],
                                 ),
                               ),
-                              // Language selector (static for now)
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withValues(alpha: 0.1),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Row(
-                                  children: [
-                                    Icon(
-                                      Icons.language,
-                                      size: 18,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      'TR',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
+                              // Language selector
+                              GestureDetector(
+                                onTap: () {
+                                  _showLanguageBottomSheet(context);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withValues(
+                                          alpha: 0.1,
+                                        ),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.language,
+                                        size: 18,
+                                        color: Colors.grey,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        context
+                                            .watch<AppLanguageCubit>()
+                                            .state
+                                            .languageCode
+                                            .toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -259,45 +274,54 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                               ),
                               const SizedBox(height: 24),
                               // Main heading
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: const TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'Sağlığınız İçin\n',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
+                              Align(
+                                alignment: Alignment.center,
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            '${context.loc.t('main.heroTitleLine1')}\n',
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
                                       ),
-                                    ),
-                                    TextSpan(
-                                      text: 'One Clinic Yanınızda',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF16A34A),
+                                      TextSpan(
+                                        text: context.loc.t(
+                                          'main.heroTitleLine2',
+                                        ),
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF16A34A),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 16),
                               // Description text
-                              const Text(
-                                'En iyi uzmanlar ve modern tedavi yöntemleri ile sağlık voluluğunuzu güvenle planlayın.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                  height: 1.5,
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  context.loc.t('main.heroDescription'),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                    height: 1.5,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 32),
                               // Email label and input
-                              const Text(
-                                'E-posta',
-                                style: TextStyle(
+                              Text(
+                                context.loc.t('signIn.emailLabel'),
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
@@ -309,15 +333,17 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'E-posta gerekli';
+                                    return context.loc.t(
+                                      'signIn.emailRequired',
+                                    );
                                   }
                                   if (!value.contains('@')) {
-                                    return 'Geçerli bir e-posta adresi girin';
+                                    return context.loc.t('signIn.emailInvalid');
                                   }
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                  hintText: 'E-posta adresinizi girin',
+                                  hintText: context.loc.t('signIn.emailHint'),
                                   filled: true,
                                   fillColor: const Color(0xFFF8FAFC),
                                   border: OutlineInputBorder(
@@ -358,9 +384,9 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                               ),
                               const SizedBox(height: 20),
                               // Password label and input
-                              const Text(
-                                'Şifre',
-                                style: TextStyle(
+                              Text(
+                                context.loc.t('signIn.passwordLabel'),
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
@@ -372,15 +398,19 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                 obscureText: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Şifre gerekli';
+                                    return context.loc.t(
+                                      'signIn.passwordRequired',
+                                    );
                                   }
                                   if (value.length < 6) {
-                                    return 'Şifre en az 6 karakter olmalı';
+                                    return context.loc.t('signIn.passwordMin');
                                   }
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                  hintText: 'Şifrenizi girin',
+                                  hintText: context.loc.t(
+                                    'signIn.passwordHint',
+                                  ),
                                   filled: true,
                                   fillColor: const Color(0xFFF8FAFC),
                                   border: OutlineInputBorder(
@@ -459,9 +489,9 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                             strokeWidth: 2,
                                           ),
                                         )
-                                      : const Text(
-                                          'Giriş Yap',
-                                          style: TextStyle(
+                                      : Text(
+                                          context.loc.t('signIn.loginButton'),
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
@@ -481,6 +511,112 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.6,
+          minChildSize: 0.3,
+          maxChildSize: 0.9,
+          expand: false,
+          builder: (context, scrollController) {
+            return Container(
+              padding: const EdgeInsets.all(20),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  Text(
+                    context.loc.t('language.selectTitle'),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ListTile(
+                    title: Text(context.loc.t('language.turkish')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('tr');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.english')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('en');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.german')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('de');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.spanish')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('es');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.russian')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('ru');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.polish')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('pl');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.french')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('fr');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.portuguese')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('pt');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.italian')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('it');
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(context.loc.t('language.arabic')),
+                    onTap: () {
+                      context.read<AppLanguageCubit>().setLocaleByCode('ar');
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
