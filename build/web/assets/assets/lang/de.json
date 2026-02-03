@@ -1,0 +1,199 @@
+{
+	"meta": {
+		"direction": "ltr"
+	},
+	"app": {
+		"name": "One Clinic",
+		"brandUpper": "ONE CLİNİC"
+	},
+	"language": {
+		"selectTitle": "Sprache wählen",
+		"turkish": "Türkisch",
+		"english": "Englisch",
+		"german": "Deutsch",
+		"arabic": "Arabisch",
+		"spanish": "Spanisch",
+		"russian": "Russisch",
+		"polish": "Polnisch",
+		"french": "Französisch",
+		"portuguese": "Portugiesisch",
+		"italian": "Italienisch"
+	},
+	"main": {
+		"snackbarNavigateSignIn": "Zur Anmeldung wechseln...",
+		"snackbarNavigateCreateAccount": "Zur Kontoerstellung wechseln...",
+		"heroTitleLine1": "Für Ihre Gesundheit",
+		"heroTitleLine2": "One Clinic an Ihrer Seite",
+		"heroDescription": "Planen Sie Ihre Gesundheitsreise sicher mit den besten Spezialisten und modernen Behandlungsmethoden.",
+		"signInButton": "Anmelden",
+		"createAccountButton": "Konto erstellen"
+	},
+	"signIn": {
+		"loginSuccess": "Anmeldung erfolgreich!",
+		"loginFailed": "Anmeldung fehlgeschlagen",
+		"emailLabel": "E-Mail",
+		"emailRequired": "E-Mail erforderlich",
+		"emailInvalid": "Geben Sie eine gültige E-Mail-Adresse ein",
+		"emailHint": "Geben Sie Ihre E-Mail-Adresse ein",
+		"passwordLabel": "Passwort",
+		"passwordRequired": "Passwort erforderlich",
+		"passwordMin": "Passwort muss mindestens 6 Zeichen haben",
+		"passwordHint": "Geben Sie Ihr Passwort ein",
+		"loginButton": "Anmelden"
+	},
+	"home": {
+		"location": "Istanbul, TR",
+		"greeting": "Hallo!",
+		"tagline": "Eine gesunde Zukunft mit One Clinic.",
+		"searchHint": "Behandlung, Klinik oder Stadt suchen...",
+		"offersTitle": "One Clinic Angebote",
+		"popularTitle": "Beliebte Services"
+	},
+	"categories": {
+		"names": {
+			"all": "Alle",
+			"hairTransplant": "Haartransplantation",
+			"dentalAesthetic": "Zahnästhetik",
+			"skinAesthetic": "Hautästhetik",
+			"eyeSurgery": "Augenchirurgie",
+			"orthopedics": "Orthopädie"
+		},
+		"items": {
+			"all": [
+				"Bariatrische Chirurgie",
+				"Zahnmedizin",
+				"Diabetes-Behandlung",
+				"Augenchirurgie",
+				"Haartransplantation",
+				"Hautästhetik",
+				"Kardiologie",
+				"Orthopädie"
+			],
+			"hairTransplant": [
+				"Komplettpaket Haartransplantation",
+				"Haartransplantation (500 Grafts)",
+				"Haartransplantation (1000 Grafts)",
+				"Haartransplantation",
+				"Haarverdichtung",
+				"Haardesign"
+			],
+			"dentalAesthetic": [
+				"Zahnaufhellung",
+				"Zahnmedizin",
+				"Mund- und Zahngesundheit",
+				"Zahnersatz",
+				"Zahnimplantate",
+				"Kieferorthopädie",
+				"Porzellan-Veneers"
+			],
+			"skinAesthetic": [
+				"Botox-Behandlung",
+				"Filler-Behandlung",
+				"Laser-Hautbehandlung",
+				"Mikrodermabrasion",
+				"Peeling-Behandlung",
+				"Akne-Behandlung"
+			],
+			"eyeSurgery": [
+				"LASIK-Operation",
+				"Augenchirurgie",
+				"Katarakt-Operation",
+				"Sehen ohne Brille",
+				"Myopie-Behandlung",
+				"Hyperopie-Behandlung"
+			],
+			"orthopedics": [
+				"Osteoporose",
+				"Gelenkschmerzen",
+				"Schulteroperation",
+				"Knieoperation",
+				"Luxationsbehandlung",
+				"Prothesenversorgung"
+			]
+		}
+	},
+	"offers": {
+		"items": [
+			{
+				"badge": "%20 Rabatt",
+				"title": "Komplettpaket Haartransplantation",
+				"location": "Şişli, Istanbul"
+			},
+			{
+				"badge": "%15 Rabatt",
+				"title": "Haartransplantation",
+				"location": "Kadıköy, Istanbul"
+			},
+			{
+				"badge": "%10 Rabatt",
+				"title": "Zahnästhetik-Paket",
+				"location": "Beşiktaş, Istanbul"
+			}
+		]
+	},
+	"popularServices": {
+		"items": [
+			{
+				"title": "Laser-Augenoperation (LASIK)",
+				"provider": "Dünya Göz Hastanesi",
+				"price": "3.000€"
+			},
+			{
+				"title": "Rhinoplastik (Nasenästhetik)",
+				"provider": "Estetik International",
+				"price": "3.000€"
+			},
+			{
+				"title": "Zirkonkrone",
+				"provider": "DentGroup İzmir",
+				"price": "2.500€"
+			}
+		]
+	},
+	"profile": {
+		"title": "Mein Profil",
+		"userName": "Ahmet Yılmaz",
+		"memberBadge": "One Clinic Mitglied",
+		"editProfileButton": "Profil bearbeiten",
+		"quickActionsTitle": "SCHNELLAKTIONEN",
+		"quickActions": {
+			"treatmentsTitle": "Meine Behandlungen",
+			"treatmentsSubtitle": "2 bevorstehend",
+			"reportsTitle": "Epikrise-Berichte",
+			"reportsSubtitle": "Ergebnisse bereit",
+			"prescriptionsTitle": "Rezepte",
+			"prescriptionsSubtitle": "Medikationsverlauf",
+			"supportTitle": "Support",
+			"supportSubtitle": "24/7 Live"
+		},
+		"personalInfoTitle": "PERSÖNLICHE INFORMATIONEN",
+		"emailLabel": "E-Mail",
+		"phoneLabel": "Telefon",
+		"countryLabel": "Land",
+		"countryValue": "Türkei",
+		"appSettingsTitle": "APP-EINSTELLUNGEN",
+		"languageOption": "Sprache",
+		"languageValue": "Deutsch",
+		"notifications": "Benachrichtigungen",
+		"faceId": "Anmeldung mit FaceID"
+	},
+	"editProfile": {
+		"title": "Profil bearbeiten",
+		"profilePhoto": "Profilfoto",
+		"changePhotoHint": "Tippen, um das Foto zu ändern",
+		"emailSectionTitle": "Meine E-Mail-Adresse",
+		"emailHint": "Geben Sie Ihre E-Mail-Adresse ein",
+		"phoneSectionTitle": "Meine Telefonnummer",
+		"phoneHint": "Geben Sie Ihre Telefonnummer ein",
+		"cancelButton": "Abbrechen",
+		"saveButton": "Speichern",
+		"snackbarImagePicker": "Bildauswahl noch nicht implementiert",
+		"snackbarProfileUpdated": "Profil erfolgreich aktualisiert!"
+	},
+	"footer": {
+		"home": "One Clinic",
+		"search": "Suche",
+		"appointments": "Termine",
+		"profile": "Profil"
+	}
+}

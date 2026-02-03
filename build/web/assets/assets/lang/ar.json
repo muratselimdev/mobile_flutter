@@ -1,0 +1,199 @@
+{
+	"meta": {
+		"direction": "rtl"
+	},
+	"app": {
+		"name": "One Clinic",
+		"brandUpper": "ONE CLİNİC"
+	},
+	"language": {
+		"selectTitle": "اختر اللغة",
+		"turkish": "التركية",
+		"english": "الإنجليزية",
+		"german": "الألمانية",
+		"arabic": "العربية",
+		"spanish": "الإسبانية",
+		"russian": "الروسية",
+		"polish": "البولندية",
+		"french": "الفرنسية",
+		"portuguese": "البرتغالية",
+		"italian": "الإيطالية"
+	},
+	"main": {
+		"snackbarNavigateSignIn": "جارٍ الانتقال إلى تسجيل الدخول...",
+		"snackbarNavigateCreateAccount": "جارٍ الانتقال إلى إنشاء حساب...",
+		"heroTitleLine1": "من أجل صحتك",
+		"heroTitleLine2": "ون كلينك معك",
+		"heroDescription": "خطط لرحلتك الصحية بأمان مع أفضل المتخصصين وطرق العلاج الحديثة.",
+		"signInButton": "تسجيل الدخول",
+		"createAccountButton": "إنشاء حساب"
+	},
+	"signIn": {
+		"loginSuccess": "تم تسجيل الدخول بنجاح!",
+		"loginFailed": "فشل تسجيل الدخول",
+		"emailLabel": "البريد الإلكتروني",
+		"emailRequired": "البريد الإلكتروني مطلوب",
+		"emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+		"emailHint": "أدخل بريدك الإلكتروني",
+		"passwordLabel": "كلمة المرور",
+		"passwordRequired": "كلمة المرور مطلوبة",
+		"passwordMin": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+		"passwordHint": "أدخل كلمة المرور",
+		"loginButton": "تسجيل الدخول"
+	},
+	"home": {
+		"location": "إسطنبول، TR",
+		"greeting": "مرحبًا!",
+		"tagline": "مستقبل صحي مع ون كلينك.",
+		"searchHint": "ابحث عن علاج أو عيادة أو مدينة...",
+		"offersTitle": "عروض ون كلينك",
+		"popularTitle": "الخدمات الأكثر شيوعًا"
+	},
+	"categories": {
+		"names": {
+			"all": "الكل",
+			"hairTransplant": "زراعة الشعر",
+			"dentalAesthetic": "تجميل الأسنان",
+			"skinAesthetic": "تجميل البشرة",
+			"eyeSurgery": "جراحة العيون",
+			"orthopedics": "جراحة العظام"
+		},
+		"items": {
+			"all": [
+				"جراحة السمنة",
+				"طب الأسنان",
+				"علاج السكري",
+				"جراحة العيون",
+				"زراعة الشعر",
+				"تجميل البشرة",
+				"أمراض القلب",
+				"جراحة العظام"
+			],
+			"hairTransplant": [
+				"باقة زراعة شعر كاملة",
+				"زراعة شعر (500 بصيلة)",
+				"زراعة شعر (1000 بصيلة)",
+				"زراعة الشعر",
+				"تكثيف الشعر",
+				"تصميم الشعر"
+			],
+			"dentalAesthetic": [
+				"تبييض الأسنان",
+				"طب الأسنان",
+				"صحة الفم والأسنان",
+				"أطقم الأسنان",
+				"زراعة الأسنان",
+				"تقويم الأسنان",
+				"قشور البورسلان"
+			],
+			"skinAesthetic": [
+				"علاج البوتوكس",
+				"إجراء الفيلر",
+				"علاج الجلد بالليزر",
+				"تقشير جلدي دقيق",
+				"علاج التقشير",
+				"علاج حب الشباب"
+			],
+			"eyeSurgery": [
+				"عملية ليزك",
+				"جراحة العيون",
+				"عملية الساد",
+				"رؤية بدون نظارات",
+				"علاج قصر النظر",
+				"علاج طول النظر"
+			],
+			"orthopedics": [
+				"هشاشة العظام",
+				"ألم المفاصل",
+				"عملية الكتف",
+				"عملية الركبة",
+				"علاج الخلع",
+				"تركيب الأطراف الصناعية"
+			]
+		}
+	},
+	"offers": {
+		"items": [
+			{
+				"badge": "%20 خصم",
+				"title": "باقة زراعة شعر كاملة",
+				"location": "شيشلي، إسطنبول"
+			},
+			{
+				"badge": "%15 خصم",
+				"title": "زراعة الشعر",
+				"location": "كاديكوي، إسطنبول"
+			},
+			{
+				"badge": "%10 خصم",
+				"title": "باقة تجميل الأسنان",
+				"location": "بيشكتاش، إسطنبول"
+			}
+		]
+	},
+	"popularServices": {
+		"items": [
+			{
+				"title": "جراحة العيون بالليزر (LASIK)",
+				"provider": "Dünya Göz Hastanesi",
+				"price": "3.000€"
+			},
+			{
+				"title": "تجميل الأنف (رينوبلاستي)",
+				"provider": "Estetik International",
+				"price": "3.000€"
+			},
+			{
+				"title": "تاج زركونيا",
+				"provider": "DentGroup İzmir",
+				"price": "2.500€"
+			}
+		]
+	},
+	"profile": {
+		"title": "ملفي الشخصي",
+		"userName": "Ahmet Yılmaz",
+		"memberBadge": "عضو ون كلينك",
+		"editProfileButton": "تعديل الملف الشخصي",
+		"quickActionsTitle": "إجراءات سريعة",
+		"quickActions": {
+			"treatmentsTitle": "علاجاتي",
+			"treatmentsSubtitle": "2 قادم",
+			"reportsTitle": "تقارير الإبيكريز",
+			"reportsSubtitle": "النتائج جاهزة",
+			"prescriptionsTitle": "الوصفات الطبية",
+			"prescriptionsSubtitle": "سجل الأدوية",
+			"supportTitle": "الدعم",
+			"supportSubtitle": "مباشر 24/7"
+		},
+		"personalInfoTitle": "المعلومات الشخصية",
+		"emailLabel": "البريد الإلكتروني",
+		"phoneLabel": "الهاتف",
+		"countryLabel": "الدولة",
+		"countryValue": "تركيا",
+		"appSettingsTitle": "إعدادات التطبيق",
+		"languageOption": "اللغة",
+		"languageValue": "العربية",
+		"notifications": "الإشعارات",
+		"faceId": "الدخول عبر FaceID"
+	},
+	"editProfile": {
+		"title": "تعديل الملف الشخصي",
+		"profilePhoto": "صورة الملف الشخصي",
+		"changePhotoHint": "اضغط لتغيير الصورة",
+		"emailSectionTitle": "عنوان بريدي الإلكتروني",
+		"emailHint": "أدخل عنوان بريدك الإلكتروني",
+		"phoneSectionTitle": "رقم هاتفي",
+		"phoneHint": "أدخل رقم هاتفك",
+		"cancelButton": "إلغاء",
+		"saveButton": "حفظ",
+		"snackbarImagePicker": "لم يتم تنفيذ اختيار الصور بعد",
+		"snackbarProfileUpdated": "تم تحديث الملف الشخصي بنجاح!"
+	},
+	"footer": {
+		"home": "ون كلينك",
+		"search": "بحث",
+		"appointments": "المواعيد",
+		"profile": "الملف الشخصي"
+	}
+}

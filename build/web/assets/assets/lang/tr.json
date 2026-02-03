@@ -1,0 +1,199 @@
+{
+	"meta": {
+		"direction": "ltr"
+	},
+	"app": {
+		"name": "One Clinic",
+		"brandUpper": "ONE CLİNİC"
+	},
+	"language": {
+		"selectTitle": "Dil Seçin",
+		"turkish": "Türkçe",
+		"english": "English",
+		"german": "Deutsch",
+		"arabic": "Arapça",
+		"spanish": "İspanyolca",
+		"russian": "Rusça",
+		"polish": "Lehçe",
+		"french": "Fransızca",
+		"portuguese": "Portekizce",
+		"italian": "İtalyanca"
+	},
+	"main": {
+		"snackbarNavigateSignIn": "Giriş Yap sayfasına yönlendiriliyor...",
+		"snackbarNavigateCreateAccount": "Hesap Oluştur sayfasına yönlendiriliyor...",
+		"heroTitleLine1": "Sağlığınız İçin",
+		"heroTitleLine2": "One Clinic Yanınızda",
+		"heroDescription": "En iyi uzmanlar ve modern tedavi yöntemleri ile sağlık voluluğunuzu güvenle planlayın.",
+		"signInButton": "Giriş Yap",
+		"createAccountButton": "Hesap Oluştur"
+	},
+	"signIn": {
+		"loginSuccess": "Giriş başarılı!",
+		"loginFailed": "Giriş başarısız",
+		"emailLabel": "E-posta",
+		"emailRequired": "E-posta gerekli",
+		"emailInvalid": "Geçerli bir e-posta adresi girin",
+		"emailHint": "E-posta adresinizi girin",
+		"passwordLabel": "Şifre",
+		"passwordRequired": "Şifre gerekli",
+		"passwordMin": "Şifre en az 6 karakter olmalı",
+		"passwordHint": "Şifrenizi girin",
+		"loginButton": "Giriş Yap"
+	},
+	"home": {
+		"location": "İstanbul, TR",
+		"greeting": "Merhaba!",
+		"tagline": "One Clinic ile sağlıklı bir gelecek.",
+		"searchHint": "Tedavi, klinik veya şehir ara...",
+		"offersTitle": "One Clinic Fırsatları",
+		"popularTitle": "Popüler Hizmetler"
+	},
+	"categories": {
+		"names": {
+			"all": "Tümü",
+			"hairTransplant": "Saç Ekimi",
+			"dentalAesthetic": "Diş Estetik",
+			"skinAesthetic": "Cilt Estetik",
+			"eyeSurgery": "Göz Cerrahisi",
+			"orthopedics": "Ortopedi"
+		},
+		"items": {
+			"all": [
+				"Bariatrik Cerrahi",
+				"Diş Hekimliği",
+				"Diyabet Tedavisi",
+				"Göz Cerrahisi",
+				"Saç Ekimi",
+				"Cilt Estetik",
+				"Kardiyoloji",
+				"Ortopedi"
+			],
+			"hairTransplant": [
+				"Full Paket Saç Ekimi",
+				"Saç Ekimi (500 Graft)",
+				"Saç Ekimi (1000 Graft)",
+				"Saç Transplantasyonu",
+				"Saç Yoğunlaştırma",
+				"Saç Tasarımı"
+			],
+			"dentalAesthetic": [
+				"Diş Beyazlatma",
+				"Diş Hekimliği",
+				"Ağız ve Diş Sağlığı",
+				"Protez Diş",
+				"Implant Diş",
+				"Ortodonti",
+				"Porselen Veneer"
+			],
+			"skinAesthetic": [
+				"Botoks Tedavisi",
+				"Dolgu Işlemi",
+				"Lazer Cilt Tedavisi",
+				"Microdermabrasion",
+				"Peeling Tedavisi",
+				"Akne Tedavisi"
+			],
+			"eyeSurgery": [
+				"LASIK Operasyonu",
+				"Göz Cerrahisi",
+				"Katarakt Operasyonu",
+				"Gözlük Olmadan Görüş",
+				"Miyopi Tedavisi",
+				"Hipermetropi Tedavisi"
+			],
+			"orthopedics": [
+				"Kemik Erimesi",
+				"Eklem Ağrısı",
+				"Omuz Operasyonu",
+				"Diz Operasyonu",
+				"Çıkık Tedavisi",
+				"Protez Uygulaması"
+			]
+		}
+	},
+	"offers": {
+		"items": [
+			{
+				"badge": "%20 indirim",
+				"title": "Full Paket Saç Ekimi",
+				"location": "Şişli, İstanbul"
+			},
+			{
+				"badge": "%15 indirim",
+				"title": "Saç Ekimi",
+				"location": "Kadıköy, İstanbul"
+			},
+			{
+				"badge": "%10 indirim",
+				"title": "Diş Estetiği Paketi",
+				"location": "Beşiktaş, İstanbul"
+			}
+		]
+	},
+	"popularServices": {
+		"items": [
+			{
+				"title": "Lazer Göz Ameliyatı (LASIK)",
+				"provider": "Dünya Göz Hastanesi",
+				"price": "3.000€"
+			},
+			{
+				"title": "Rinoplasti (Burun Estetiği)",
+				"provider": "Estetik International",
+				"price": "3.000€"
+			},
+			{
+				"title": "Zirkonyum Kaplama",
+				"provider": "DentGroup İzmir",
+				"price": "2.500€"
+			}
+		]
+	},
+	"profile": {
+		"title": "Profilim",
+		"userName": "Ahmet Yılmaz",
+		"memberBadge": "One Clinic Üyesi",
+		"editProfileButton": "Profili Düzenle",
+		"quickActionsTitle": "HIZLI İŞLEMLER",
+		"quickActions": {
+			"treatmentsTitle": "Tedavilerim",
+			"treatmentsSubtitle": "2 yaklaşan",
+			"reportsTitle": "Epikriz Raporlarım",
+			"reportsSubtitle": "Sonuçlar hazır",
+			"prescriptionsTitle": "Reçeteler",
+			"prescriptionsSubtitle": "İlaç geçmişi",
+			"supportTitle": "Destek",
+			"supportSubtitle": "7/24 Canlı"
+		},
+		"personalInfoTitle": "KİŞİSEL BİLGİLER",
+		"emailLabel": "E-posta",
+		"phoneLabel": "Telefon",
+		"countryLabel": "Ülke",
+		"countryValue": "Türkiye",
+		"appSettingsTitle": "UYGULAMAYA AYARLARI",
+		"languageOption": "Dil Seçeneği",
+		"languageValue": "Türkçe",
+		"notifications": "Bildirimler",
+		"faceId": "FaceID ile Giriş"
+	},
+	"editProfile": {
+		"title": "Profili Düzenle",
+		"profilePhoto": "Profil Resmi",
+		"changePhotoHint": "Resmi değiştirmek için tıklayın",
+		"emailSectionTitle": "E-mail adresimi",
+		"emailHint": "E-mail adresinizi girin",
+		"phoneSectionTitle": "Telefon numaramı",
+		"phoneHint": "Telefon numaranızı girin",
+		"cancelButton": "İptal",
+		"saveButton": "Kaydet",
+		"snackbarImagePicker": "Görsel seçici henüz uygulanmadı",
+		"snackbarProfileUpdated": "Profil başarıyla güncellendi!"
+	},
+	"footer": {
+		"home": "One Clinic",
+		"search": "Ara",
+		"appointments": "Randevular",
+		"profile": "Profil"
+	}
+}

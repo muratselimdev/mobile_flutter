@@ -1,0 +1,199 @@
+{
+	"meta": {
+		"direction": "ltr"
+	},
+	"app": {
+		"name": "One Clinic",
+		"brandUpper": "ONE CLİNİC"
+	},
+	"language": {
+		"selectTitle": "Выбор языка",
+		"turkish": "Турецкий",
+		"english": "Английский",
+		"german": "Немецкий",
+		"arabic": "Арабский",
+		"spanish": "Испанский",
+		"russian": "Русский",
+		"polish": "Польский",
+		"french": "Французский",
+		"portuguese": "Португальский",
+		"italian": "Итальянский"
+	},
+	"main": {
+		"snackbarNavigateSignIn": "Переход к входу...",
+		"snackbarNavigateCreateAccount": "Переход к созданию аккаунта...",
+		"heroTitleLine1": "Для вашего здоровья",
+		"heroTitleLine2": "One Clinic рядом с вами",
+		"heroDescription": "Планируйте свой путь к здоровью безопасно с лучшими специалистами и современными методами лечения.",
+		"signInButton": "Войти",
+		"createAccountButton": "Создать аккаунт"
+	},
+	"signIn": {
+		"loginSuccess": "Вход выполнен!",
+		"loginFailed": "Ошибка входа",
+		"emailLabel": "Эл. почта",
+		"emailRequired": "Требуется эл. почта",
+		"emailInvalid": "Введите действительный адрес эл. почты",
+		"emailHint": "Введите ваш адрес эл. почты",
+		"passwordLabel": "Пароль",
+		"passwordRequired": "Пароль обязателен",
+		"passwordMin": "Пароль должен быть не менее 6 символов",
+		"passwordHint": "Введите пароль",
+		"loginButton": "Войти"
+	},
+	"home": {
+		"location": "Стамбул, TR",
+		"greeting": "Привет!",
+		"tagline": "Здоровое будущее с One Clinic.",
+		"searchHint": "Ищите лечение, клинику или город...",
+		"offersTitle": "Предложения One Clinic",
+		"popularTitle": "Популярные услуги"
+	},
+	"categories": {
+		"names": {
+			"all": "Все",
+			"hairTransplant": "Пересадка волос",
+			"dentalAesthetic": "Зубная эстетика",
+			"skinAesthetic": "Эстетика кожи",
+			"eyeSurgery": "Хирургия глаз",
+			"orthopedics": "Ортопедия"
+		},
+		"items": {
+			"all": [
+				"Бариатрическая хирургия",
+				"Стоматология",
+				"Лечение диабета",
+				"Хирургия глаз",
+				"Пересадка волос",
+				"Эстетика кожи",
+				"Кардиология",
+				"Ортопедия"
+			],
+			"hairTransplant": [
+				"Полный пакет пересадки волос",
+				"Пересадка волос (500 графтов)",
+				"Пересадка волос (1000 графтов)",
+				"Пересадка волос",
+				"Уплотнение волос",
+				"Дизайн волос"
+			],
+			"dentalAesthetic": [
+				"Отбеливание зубов",
+				"Стоматология",
+				"Здоровье полости рта и зубов",
+				"Зубные протезы",
+				"Зубные импланты",
+				"Ортодонтия",
+				"Фарфоровые виниры"
+			],
+			"skinAesthetic": [
+				"Ботокс-терапия",
+				"Процедура филлера",
+				"Лазерное лечение кожи",
+				"Микродермабразия",
+				"Пилинг",
+				"Лечение акне"
+			],
+			"eyeSurgery": [
+				"Операция LASIK",
+				"Хирургия глаз",
+				"Операция катаракты",
+				"Зрение без очков",
+				"Лечение миопии",
+				"Лечение гиперметропии"
+			],
+			"orthopedics": [
+				"Остеопороз",
+				"Боль в суставах",
+				"Операция плеча",
+				"Операция колена",
+				"Лечение вывиха",
+				"Протезирование"
+			]
+		}
+	},
+	"offers": {
+		"items": [
+			{
+				"badge": "%20 скидка",
+				"title": "Полный пакет пересадки волос",
+				"location": "Şişli, Стамбул"
+			},
+			{
+				"badge": "%15 скидка",
+				"title": "Пересадка волос",
+				"location": "Kadıköy, Стамбул"
+			},
+			{
+				"badge": "%10 скидка",
+				"title": "Пакет зубной эстетики",
+				"location": "Beşiktaş, Стамбул"
+			}
+		]
+	},
+	"popularServices": {
+		"items": [
+			{
+				"title": "Лазерная операция на глазах (LASIK)",
+				"provider": "Dünya Göz Hastanesi",
+				"price": "3.000€"
+			},
+			{
+				"title": "Ринопластика (эстетика носа)",
+				"provider": "Estetik International",
+				"price": "3.000€"
+			},
+			{
+				"title": "Циркониевая коронка",
+				"provider": "DentGroup İzmir",
+				"price": "2.500€"
+			}
+		]
+	},
+	"profile": {
+		"title": "Мой профиль",
+		"userName": "Ahmet Yılmaz",
+		"memberBadge": "Участник One Clinic",
+		"editProfileButton": "Редактировать профиль",
+		"quickActionsTitle": "БЫСТРЫЕ ДЕЙСТВИЯ",
+		"quickActions": {
+			"treatmentsTitle": "Мои лечения",
+			"treatmentsSubtitle": "2 предстоящие",
+			"reportsTitle": "Мои эпикризные отчеты",
+			"reportsSubtitle": "Результаты готовы",
+			"prescriptionsTitle": "Рецепты",
+			"prescriptionsSubtitle": "История лекарств",
+			"supportTitle": "Поддержка",
+			"supportSubtitle": "24/7 онлайн"
+		},
+		"personalInfoTitle": "ЛИЧНАЯ ИНФОРМАЦИЯ",
+		"emailLabel": "Эл. почта",
+		"phoneLabel": "Телефон",
+		"countryLabel": "Страна",
+		"countryValue": "Турция",
+		"appSettingsTitle": "НАСТРОЙКИ ПРИЛОЖЕНИЯ",
+		"languageOption": "Язык",
+		"languageValue": "Русский",
+		"notifications": "Уведомления",
+		"faceId": "Вход с FaceID"
+	},
+	"editProfile": {
+		"title": "Редактировать профиль",
+		"profilePhoto": "Фото профиля",
+		"changePhotoHint": "Нажмите, чтобы изменить фото",
+		"emailSectionTitle": "Мой адрес эл. почты",
+		"emailHint": "Введите адрес эл. почты",
+		"phoneSectionTitle": "Мой номер телефона",
+		"phoneHint": "Введите номер телефона",
+		"cancelButton": "Отмена",
+		"saveButton": "Сохранить",
+		"snackbarImagePicker": "Выбор изображения еще не реализован",
+		"snackbarProfileUpdated": "Профиль успешно обновлен!"
+	},
+	"footer": {
+		"home": "One Clinic",
+		"search": "Поиск",
+		"appointments": "Записи",
+		"profile": "Профиль"
+	}
+}

@@ -1,0 +1,199 @@
+{
+	"meta": {
+		"direction": "ltr"
+	},
+	"app": {
+		"name": "One Clinic",
+		"brandUpper": "ONE CLİNİC"
+	},
+	"language": {
+		"selectTitle": "Wybierz język",
+		"turkish": "Turecki",
+		"english": "Angielski",
+		"german": "Niemiecki",
+		"arabic": "Arabski",
+		"spanish": "Hiszpański",
+		"russian": "Rosyjski",
+		"polish": "Polski",
+		"french": "Francuski",
+		"portuguese": "Portugalski",
+		"italian": "Włoski"
+	},
+	"main": {
+		"snackbarNavigateSignIn": "Przechodzenie do logowania...",
+		"snackbarNavigateCreateAccount": "Przechodzenie do tworzenia konta...",
+		"heroTitleLine1": "Dla Twojego zdrowia",
+		"heroTitleLine2": "One Clinic jest z Tobą",
+		"heroDescription": "Planuj swoją drogę do zdrowia bezpiecznie z najlepszymi specjalistami i nowoczesnymi metodami leczenia.",
+		"signInButton": "Zaloguj się",
+		"createAccountButton": "Utwórz konto"
+	},
+	"signIn": {
+		"loginSuccess": "Logowanie zakończone sukcesem!",
+		"loginFailed": "Logowanie nieudane",
+		"emailLabel": "E-mail",
+		"emailRequired": "E-mail jest wymagany",
+		"emailInvalid": "Wprowadź poprawny adres e-mail",
+		"emailHint": "Wprowadź swój adres e-mail",
+		"passwordLabel": "Hasło",
+		"passwordRequired": "Hasło jest wymagane",
+		"passwordMin": "Hasło musi mieć co najmniej 6 znaków",
+		"passwordHint": "Wprowadź hasło",
+		"loginButton": "Zaloguj się"
+	},
+	"home": {
+		"location": "Stambuł, TR",
+		"greeting": "Cześć!",
+		"tagline": "Zdrowa przyszłość z One Clinic.",
+		"searchHint": "Szukaj leczenia, kliniki lub miasta...",
+		"offersTitle": "Oferty One Clinic",
+		"popularTitle": "Popularne usługi"
+	},
+	"categories": {
+		"names": {
+			"all": "Wszystkie",
+			"hairTransplant": "Przeszczep włosów",
+			"dentalAesthetic": "Estetyka stomatologiczna",
+			"skinAesthetic": "Estetyka skóry",
+			"eyeSurgery": "Chirurgia oka",
+			"orthopedics": "Ortopedia"
+		},
+		"items": {
+			"all": [
+				"Chirurgia bariatryczna",
+				"Stomatologia",
+				"Leczenie cukrzycy",
+				"Chirurgia oka",
+				"Przeszczep włosów",
+				"Estetyka skóry",
+				"Kardiologia",
+				"Ortopedia"
+			],
+			"hairTransplant": [
+				"Pełny pakiet przeszczepu włosów",
+				"Przeszczep włosów (500 graftów)",
+				"Przeszczep włosów (1000 graftów)",
+				"Transplantacja włosów",
+				"Zagęszczanie włosów",
+				"Projekt włosów"
+			],
+			"dentalAesthetic": [
+				"Wybielanie zębów",
+				"Stomatologia",
+				"Zdrowie jamy ustnej i zębów",
+				"Protezy zębowe",
+				"Implanty zębowe",
+				"Ortodoncja",
+				"Licówki porcelanowe"
+			],
+			"skinAesthetic": [
+				"Leczenie botoksem",
+				"Zabieg wypełniania",
+				"Laserowe leczenie skóry",
+				"Mikrodermabrazja",
+				"Zabieg peelingu",
+				"Leczenie trądziku"
+			],
+			"eyeSurgery": [
+				"Operacja LASIK",
+				"Chirurgia oka",
+				"Operacja zaćmy",
+				"Widzenie bez okularów",
+				"Leczenie krótkowzroczności",
+				"Leczenie nadwzroczności"
+			],
+			"orthopedics": [
+				"Osteoporoza",
+				"Ból stawów",
+				"Operacja barku",
+				"Operacja kolana",
+				"Leczenie zwichnięcia",
+				"Zastosowanie protezy"
+			]
+		}
+	},
+	"offers": {
+		"items": [
+			{
+				"badge": "%20 zniżki",
+				"title": "Pełny pakiet przeszczepu włosów",
+				"location": "Şişli, Stambuł"
+			},
+			{
+				"badge": "%15 zniżki",
+				"title": "Przeszczep włosów",
+				"location": "Kadıköy, Stambuł"
+			},
+			{
+				"badge": "%10 zniżki",
+				"title": "Pakiet estetyki stomatologicznej",
+				"location": "Beşiktaş, Stambuł"
+			}
+		]
+	},
+	"popularServices": {
+		"items": [
+			{
+				"title": "Laserowa operacja oczu (LASIK)",
+				"provider": "Dünya Göz Hastanesi",
+				"price": "3.000€"
+			},
+			{
+				"title": "Rynoplastyka (estetyka nosa)",
+				"provider": "Estetik International",
+				"price": "3.000€"
+			},
+			{
+				"title": "Korona cyrkonowa",
+				"provider": "DentGroup İzmir",
+				"price": "2.500€"
+			}
+		]
+	},
+	"profile": {
+		"title": "Mój profil",
+		"userName": "Ahmet Yılmaz",
+		"memberBadge": "Członek One Clinic",
+		"editProfileButton": "Edytuj profil",
+		"quickActionsTitle": "SZYBKIE AKCJE",
+		"quickActions": {
+			"treatmentsTitle": "Moje zabiegi",
+			"treatmentsSubtitle": "2 nadchodzące",
+			"reportsTitle": "Moje raporty epikryzy",
+			"reportsSubtitle": "Wyniki gotowe",
+			"prescriptionsTitle": "Recepty",
+			"prescriptionsSubtitle": "Historia leków",
+			"supportTitle": "Wsparcie",
+			"supportSubtitle": "Na żywo 24/7"
+		},
+		"personalInfoTitle": "INFORMACJE OSOBISTE",
+		"emailLabel": "E-mail",
+		"phoneLabel": "Telefon",
+		"countryLabel": "Kraj",
+		"countryValue": "Turcja",
+		"appSettingsTitle": "USTAWIENIA APLIKACJI",
+		"languageOption": "Język",
+		"languageValue": "Polski",
+		"notifications": "Powiadomienia",
+		"faceId": "Logowanie FaceID"
+	},
+	"editProfile": {
+		"title": "Edytuj profil",
+		"profilePhoto": "Zdjęcie profilu",
+		"changePhotoHint": "Stuknij, aby zmienić zdjęcie",
+		"emailSectionTitle": "Mój adres e-mail",
+		"emailHint": "Wprowadź adres e-mail",
+		"phoneSectionTitle": "Mój numer telefonu",
+		"phoneHint": "Wprowadź numer telefonu",
+		"cancelButton": "Anuluj",
+		"saveButton": "Zapisz",
+		"snackbarImagePicker": "Wybór obrazu nie został jeszcze zaimplementowany",
+		"snackbarProfileUpdated": "Profil zaktualizowano pomyślnie!"
+	},
+	"footer": {
+		"home": "One Clinic",
+		"search": "Szukaj",
+		"appointments": "Wizyty",
+		"profile": "Profil"
+	}
+}
