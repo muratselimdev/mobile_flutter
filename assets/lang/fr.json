@@ -1,0 +1,139 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "Accueil",
+    "search": "Rechercher",
+    "appointments": "Rendez-vous",
+    "profile": "Profil"
+  },
+  "language": {
+    "selectTitle": "Sélectionner la langue",
+    "turkish": "Turc",
+    "english": "Anglais",
+    "german": "Allemand",
+    "spanish": "Espagnol",
+    "russian": "Russe",
+    "polish": "Polonais",
+    "french": "Français",
+    "portuguese": "Portugais",
+    "italian": "Italien",
+    "arabic": "Arabe"
+  },
+  "main": {
+    "heroTitleLine1": "Titre héros ligne 1",
+    "heroTitleLine2": "Titre héros ligne 2",
+    "heroDescription": "Description du héros",
+    "signInButton": "Se connecter",
+    "createAccountButton": "Créer un compte"
+  },
+  "signIn": {
+    "loginSuccess": "Connexion réussie",
+    "loginFailed": "Échec de la connexion",
+    "emailLabel": "E-mail",
+    "emailRequired": "L'e-mail est requis",
+    "emailInvalid": "Entrez un e-mail valide",
+    "emailHint": "E-mail",
+    "passwordLabel": "Mot de passe",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordMin": "Le mot de passe doit contenir au moins 6 caractères",
+    "passwordHint": "Mot de passe",
+    "loginButton": "Se connecter"
+  },
+  "home": {
+    "location": "Lieu",
+    "greeting": "Bonjour",
+    "tagline": "Trouvez les bons soins",
+    "searchHint": "Rechercher",
+    "offersTitle": "Offres",
+    "popularTitle": "Populaire"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "20% de remise",
+        "title": "Forfait complet de greffe de cheveux",
+        "location": "Sisli, Istanbul"
+      },
+      {
+        "badge": "15% de remise",
+        "title": "Greffe de cheveux",
+        "location": "Kadikoy, Istanbul"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "Implants dentaires",
+        "provider": "One Clinic",
+        "price": "€1200",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Traitement au botox",
+        "provider": "One Clinic",
+        "price": "€350",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Chirurgie oculaire au laser",
+        "provider": "One Clinic",
+        "price": "€950",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "Tous",
+      "hairTransplant": "Greffe de cheveux",
+      "dentalAesthetic": "Esthétique dentaire",
+      "skinAesthetic": "Esthétique de la peau",
+      "eyeSurgery": "Chirurgie oculaire",
+      "orthopedics": "Orthopédie"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "userName": "Ahmet Yilmaz",
+    "memberBadge": "Membre",
+    "editProfileButton": "Modifier le profil",
+    "quickActionsTitle": "Actions rapides",
+    "quickActions": {
+      "treatmentsTitle": "Traitements",
+      "treatmentsSubtitle": "Voir vos traitements",
+      "reportsTitle": "Rapports",
+      "reportsSubtitle": "Voir les résultats",
+      "prescriptionsTitle": "Ordonnances",
+      "prescriptionsSubtitle": "Gérer les médicaments",
+      "supportTitle": "Support",
+      "supportSubtitle": "Discutez avec nous"
+    },
+    "personalInfoTitle": "Informations personnelles",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Téléphone",
+    "countryLabel": "Pays/Région",
+    "countryValue": "Turquie",
+    "appSettingsTitle": "Paramètres de l'application",
+    "languageOption": "Langue",
+    "languageValue": "Français",
+    "notifications": "Notifications",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "Modifier le profil",
+    "profilePhoto": "Photo de profil",
+    "snackbarImagePicker": "Sélecteur d'images ouvert",
+    "changePhotoHint": "Changer la photo",
+    "emailSectionTitle": "E-mail",
+    "emailHint": "E-mail",
+    "phoneSectionTitle": "Téléphone",
+    "phoneHint": "Téléphone",
+    "cancelButton": "Annuler",
+    "snackbarProfileUpdated": "Profil mis à jour",
+    "saveButton": "Enregistrer"
+  }
+}

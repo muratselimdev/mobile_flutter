@@ -1,0 +1,181 @@
+{
+	"app": {
+		"name": "One Clinic",
+		"brandUpper": "ONE CLINIC"
+	},
+	"footer": {
+		"home": "Home",
+		"search": "Search",
+		"appointments": "Appointments",
+		"profile": "Profile"
+	},
+	"language": {
+		"selectTitle": "Select language",
+		"turkish": "Turkish",
+		"english": "English",
+		"german": "German",
+		"spanish": "Spanish",
+		"russian": "Russian",
+		"polish": "Polish",
+		"french": "French",
+		"portuguese": "Portuguese",
+		"italian": "Italian",
+		"arabic": "Arabic"
+	},
+	"main": {
+		"heroTitleLine1": "Hero Title Line1",
+		"heroTitleLine2": "Hero Title Line2",
+		"heroDescription": "Hero Description",
+		"signInButton": "Sign in",
+		"createAccountButton": "Create account"
+	},
+	"signIn": {
+		"loginSuccess": "Signed in successfully",
+		"loginFailed": "Sign in failed",
+		"emailLabel": "Email",
+		"emailRequired": "Email is required",
+		"emailInvalid": "Enter a valid email",
+		"emailHint": "Email",
+		"passwordLabel": "Password",
+		"passwordRequired": "Password is required",
+		"passwordMin": "Password must be at least 6 characters",
+		"passwordHint": "Password",
+		"loginButton": "Sign in"
+	},
+	"home": {
+		"location": "Location",
+		"greeting": "Hello",
+		"tagline": "Find the right care",
+		"searchHint": "Search",
+		"offersTitle": "Offers",
+		"popularTitle": "Popular"
+	},
+	"offers": {
+		"items": [
+			{
+				"badge": "20% Off",
+				"title": "Full Package Hair Transplant",
+				"location": "Sisli, Istanbul"
+			},
+			{
+				"badge": "15% Off",
+				"title": "Hair Transplant",
+				"location": "Kadikoy, Istanbul"
+			}
+		]
+	},
+	"popularServices": {
+		"items": [
+			{
+				"title": "Dental Implants",
+				"provider": "One Clinic",
+				"price": "$1200",
+				"imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+			},
+			{
+				"title": "Botox Treatment",
+				"provider": "One Clinic",
+				"price": "$350",
+				"imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+			},
+			{
+				"title": "Laser Eye Surgery",
+				"provider": "One Clinic",
+				"price": "$950",
+				"imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+			}
+		]
+	},
+	"categories": {
+		"names": {
+			"all": "All",
+			"hairTransplant": "Hair Transplant",
+			"dentalAesthetic": "Dental Aesthetic",
+			"skinAesthetic": "Skin Aesthetic",
+			"eyeSurgery": "Eye Surgery",
+			"orthopedics": "Orthopedics"
+		},
+		"items": {
+			"all": [
+				"Bariatric Surgery",
+				"Dentistry",
+				"Diabetes Treatment",
+				"Eye Surgery",
+				"Hair Transplant",
+				"Skin Aesthetic",
+				"Cardiology",
+				"Orthopedics"
+			],
+			"hairTransplant": [
+				"FUE Hair Transplant",
+				"DHI Hair Transplant",
+				"Beard Transplant",
+				"Eyebrow Transplant"
+			],
+			"dentalAesthetic": [
+				"Dental Implants",
+				"Teeth Whitening",
+				"Veneers",
+				"Smile Design"
+			],
+			"skinAesthetic": [
+				"Botox",
+				"Fillers",
+				"Laser Skin Care",
+				"Skin Rejuvenation"
+			],
+			"eyeSurgery": [
+				"Laser Eye Surgery",
+				"Cataract Surgery",
+				"Lens Replacement",
+				"Glaucoma Treatment"
+			],
+			"orthopedics": [
+				"Knee Replacement",
+				"Hip Replacement",
+				"Spine Surgery",
+				"Sports Injury"
+			]
+		}
+	},
+	"profile": {
+		"title": "Profile",
+		"userName": "Ahmet Yilmaz",
+		"memberBadge": "Member",
+		"editProfileButton": "Edit Profile",
+		"quickActionsTitle": "Quick Actions",
+		"quickActions": {
+			"treatmentsTitle": "Treatments",
+			"treatmentsSubtitle": "View your treatments",
+			"reportsTitle": "Reports",
+			"reportsSubtitle": "See test results",
+			"prescriptionsTitle": "Prescriptions",
+			"prescriptionsSubtitle": "Manage medications",
+			"supportTitle": "Support",
+			"supportSubtitle": "Chat with us"
+		},
+		"personalInfoTitle": "Personal Information",
+		"emailLabel": "Email",
+		"phoneLabel": "Phone",
+		"countryLabel": "Country/Region",
+		"countryValue": "Turkey",
+		"appSettingsTitle": "App Settings",
+		"languageOption": "Language",
+		"languageValue": "English",
+		"notifications": "Notifications",
+		"faceId": "Face ID"
+	},
+	"editProfile": {
+		"title": "Edit Profile",
+		"profilePhoto": "Profile Photo",
+		"snackbarImagePicker": "Image picker opened",
+		"changePhotoHint": "Change photo",
+		"emailSectionTitle": "Email",
+		"emailHint": "Email",
+		"phoneSectionTitle": "Phone",
+		"phoneHint": "Phone",
+		"cancelButton": "Cancel",
+		"snackbarProfileUpdated": "Profile updated",
+		"saveButton": "Save"
+	}
+}

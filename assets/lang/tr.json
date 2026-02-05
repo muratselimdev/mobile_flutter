@@ -1,0 +1,181 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "Ana Sayfa",
+    "search": "Ara",
+    "appointments": "Randevular",
+    "profile": "Profil"
+  },
+  "language": {
+    "selectTitle": "Dil seçin",
+    "turkish": "Türkçe",
+    "english": "İngilizce",
+    "german": "Almanca",
+    "spanish": "İspanyolca",
+    "russian": "Rusça",
+    "polish": "Lehçe",
+    "french": "Fransızca",
+    "portuguese": "Portekizce",
+    "italian": "İtalyanca",
+    "arabic": "Arapça"
+  },
+  "main": {
+    "heroTitleLine1": "Kahraman Başlık 1",
+    "heroTitleLine2": "Kahraman Başlık 2",
+    "heroDescription": "Tanıtım açıklaması",
+    "signInButton": "Giriş yap",
+    "createAccountButton": "Hesap oluştur"
+  },
+  "signIn": {
+    "loginSuccess": "Giriş başarılı",
+    "loginFailed": "Giriş başarısız",
+    "emailLabel": "E-posta",
+    "emailRequired": "E-posta gerekli",
+    "emailInvalid": "Geçerli bir e-posta girin",
+    "emailHint": "E-posta",
+    "passwordLabel": "Şifre",
+    "passwordRequired": "Şifre gerekli",
+    "passwordMin": "Şifre en az 6 karakter olmalı",
+    "passwordHint": "Şifre",
+    "loginButton": "Giriş yap"
+  },
+  "home": {
+    "location": "Konum",
+    "greeting": "Merhaba",
+    "tagline": "Doğru bakımı bulun",
+    "searchHint": "Ara",
+    "offersTitle": "Teklifler",
+    "popularTitle": "Popüler"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "%20 İndirim",
+        "title": "Full Paket Saç Ekimi",
+        "location": "Şişli, İstanbul"
+      },
+      {
+        "badge": "%15 İndirim",
+        "title": "Saç Ekimi",
+        "location": "Kadıköy, İstanbul"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "Diş İmplantı",
+        "provider": "One Clinic",
+        "price": "₺42.000",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Botoks Uygulaması",
+        "provider": "One Clinic",
+        "price": "₺6.500",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Lazer Göz Ameliyatı",
+        "provider": "One Clinic",
+        "price": "₺28.000",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "Tümü",
+      "hairTransplant": "Saç Ekimi",
+      "dentalAesthetic": "Diş Estetiği",
+      "skinAesthetic": "Cilt Estetiği",
+      "eyeSurgery": "Göz Cerrahisi",
+      "orthopedics": "Ortopedi"
+    },
+    "items": {
+      "all": [
+        "Bariatrik Cerrahi",
+        "Diş Hekimliği",
+        "Diyabet Tedavisi",
+        "Göz Cerrahisi",
+        "Saç Ekimi",
+        "Cilt Estetik",
+        "Kardiyoloji",
+        "Ortopedi"
+      ],
+      "hairTransplant": [
+        "FUE Saç Ekimi",
+        "DHI Saç Ekimi",
+        "Sakal Ekimi",
+        "Kaş Ekimi"
+      ],
+      "dentalAesthetic": [
+        "Diş İmplantı",
+        "Diş Beyazlatma",
+        "Porselen Kaplama",
+        "Gülüş Tasarımı"
+      ],
+      "skinAesthetic": [
+        "Botoks",
+        "Dolgu",
+        "Lazer Cilt Bakımı",
+        "Cilt Gençleştirme"
+      ],
+      "eyeSurgery": [
+        "Lazer Göz Ameliyatı",
+        "Katarakt Ameliyatı",
+        "Lens Değişimi",
+        "Glokom Tedavisi"
+      ],
+      "orthopedics": [
+        "Diz Protezi",
+        "Kalça Protezi",
+        "Omurga Cerrahisi",
+        "Spor Yaralanmaları"
+      ]
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "userName": "Ahmet Yılmaz",
+    "memberBadge": "Üye",
+    "editProfileButton": "Profili Düzenle",
+    "quickActionsTitle": "Hızlı İşlemler",
+    "quickActions": {
+      "treatmentsTitle": "Tedaviler",
+      "treatmentsSubtitle": "Tedavilerinizi görüntüleyin",
+      "reportsTitle": "Raporlar",
+      "reportsSubtitle": "Test sonuçlarını görün",
+      "prescriptionsTitle": "Reçeteler",
+      "prescriptionsSubtitle": "İlaçlarınızı yönetin",
+      "supportTitle": "Destek",
+      "supportSubtitle": "Bizimle sohbet edin"
+    },
+    "personalInfoTitle": "Kişisel Bilgiler",
+    "emailLabel": "E-posta",
+    "phoneLabel": "Telefon",
+    "countryLabel": "Ülke/Bölge",
+    "countryValue": "Türkiye",
+    "appSettingsTitle": "Uygulama Ayarları",
+    "languageOption": "Dil",
+    "languageValue": "Türkçe",
+    "notifications": "Bildirimler",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "Profili Düzenle",
+    "profilePhoto": "Profil Fotoğrafı",
+    "snackbarImagePicker": "Resim seçici açıldı",
+    "changePhotoHint": "Fotoğrafı değiştir",
+    "emailSectionTitle": "E-posta",
+    "emailHint": "E-posta",
+    "phoneSectionTitle": "Telefon",
+    "phoneHint": "Telefon",
+    "cancelButton": "İptal",
+    "snackbarProfileUpdated": "Profil güncellendi",
+    "saveButton": "Kaydet"
+  }
+}

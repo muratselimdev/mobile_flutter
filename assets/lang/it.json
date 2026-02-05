@@ -1,0 +1,139 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "Home",
+    "search": "Cerca",
+    "appointments": "Appuntamenti",
+    "profile": "Profilo"
+  },
+  "language": {
+    "selectTitle": "Seleziona lingua",
+    "turkish": "Turco",
+    "english": "Inglese",
+    "german": "Tedesco",
+    "spanish": "Spagnolo",
+    "russian": "Russo",
+    "polish": "Polacco",
+    "french": "Francese",
+    "portuguese": "Portoghese",
+    "italian": "Italiano",
+    "arabic": "Arabo"
+  },
+  "main": {
+    "heroTitleLine1": "Titolo eroe riga 1",
+    "heroTitleLine2": "Titolo eroe riga 2",
+    "heroDescription": "Descrizione eroe",
+    "signInButton": "Accedi",
+    "createAccountButton": "Crea account"
+  },
+  "signIn": {
+    "loginSuccess": "Accesso riuscito",
+    "loginFailed": "Accesso non riuscito",
+    "emailLabel": "Email",
+    "emailRequired": "L'email è obbligatoria",
+    "emailInvalid": "Inserisci un'email valida",
+    "emailHint": "Email",
+    "passwordLabel": "Password",
+    "passwordRequired": "La password è obbligatoria",
+    "passwordMin": "La password deve essere di almeno 6 caratteri",
+    "passwordHint": "Password",
+    "loginButton": "Accedi"
+  },
+  "home": {
+    "location": "Posizione",
+    "greeting": "Ciao",
+    "tagline": "Trova la cura giusta",
+    "searchHint": "Cerca",
+    "offersTitle": "Offerte",
+    "popularTitle": "Popolare"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "20% di sconto",
+        "title": "Pacchetto completo trapianto di capelli",
+        "location": "Sisli, Istanbul"
+      },
+      {
+        "badge": "15% di sconto",
+        "title": "Trapianto di capelli",
+        "location": "Kadikoy, Istanbul"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "Impianti dentali",
+        "provider": "One Clinic",
+        "price": "€1200",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Trattamento botox",
+        "provider": "One Clinic",
+        "price": "€350",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Chirurgia oculare laser",
+        "provider": "One Clinic",
+        "price": "€950",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "Tutti",
+      "hairTransplant": "Trapianto di capelli",
+      "dentalAesthetic": "Estetica dentale",
+      "skinAesthetic": "Estetica della pelle",
+      "eyeSurgery": "Chirurgia oculare",
+      "orthopedics": "Ortopedia"
+    }
+  },
+  "profile": {
+    "title": "Profilo",
+    "userName": "Ahmet Yilmaz",
+    "memberBadge": "Membro",
+    "editProfileButton": "Modifica profilo",
+    "quickActionsTitle": "Azioni rapide",
+    "quickActions": {
+      "treatmentsTitle": "Trattamenti",
+      "treatmentsSubtitle": "Visualizza i tuoi trattamenti",
+      "reportsTitle": "Report",
+      "reportsSubtitle": "Vedi i risultati",
+      "prescriptionsTitle": "Prescrizioni",
+      "prescriptionsSubtitle": "Gestisci i farmaci",
+      "supportTitle": "Supporto",
+      "supportSubtitle": "Chatta con noi"
+    },
+    "personalInfoTitle": "Informazioni personali",
+    "emailLabel": "Email",
+    "phoneLabel": "Telefono",
+    "countryLabel": "Paese/Regione",
+    "countryValue": "Turchia",
+    "appSettingsTitle": "Impostazioni app",
+    "languageOption": "Lingua",
+    "languageValue": "Italiano",
+    "notifications": "Notifiche",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "Modifica profilo",
+    "profilePhoto": "Foto profilo",
+    "snackbarImagePicker": "Selettore immagini aperto",
+    "changePhotoHint": "Cambia foto",
+    "emailSectionTitle": "Email",
+    "emailHint": "Email",
+    "phoneSectionTitle": "Telefono",
+    "phoneHint": "Telefono",
+    "cancelButton": "Annulla",
+    "snackbarProfileUpdated": "Profilo aggiornato",
+    "saveButton": "Salva"
+  }
+}

@@ -29,6 +29,7 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<AppLanguageCubit>();
     return Center(
       child: BlocProvider(
         create: (context) => AuthBloc(authService: AuthService()),
@@ -518,103 +519,109 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      useRootNavigator: true,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      showDragHandle: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        return DraggableScrollableSheet(
-          initialChildSize: 0.6,
-          minChildSize: 0.3,
-          maxChildSize: 0.9,
-          expand: false,
-          builder: (context, scrollController) {
-            return Container(
-              padding: const EdgeInsets.all(20),
-              child: ListView(
-                controller: scrollController,
-                children: [
-                  Text(
-                    context.loc.t('language.selectTitle'),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+        return SafeArea(
+          child: DraggableScrollableSheet(
+            initialChildSize: 0.6,
+            minChildSize: 0.3,
+            maxChildSize: 0.9,
+            expand: false,
+            builder: (context, scrollController) {
+              return Container(
+                padding: const EdgeInsets.all(20),
+                color: Theme.of(context).colorScheme.surface,
+                child: ListView(
+                  controller: scrollController,
+                  children: [
+                    Text(
+                      context.loc.t('language.selectTitle'),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  ListTile(
-                    title: Text(context.loc.t('language.turkish')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('tr');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.english')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('en');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.german')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('de');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.spanish')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('es');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.russian')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('ru');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.polish')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('pl');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.french')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('fr');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.portuguese')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('pt');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.italian')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('it');
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text(context.loc.t('language.arabic')),
-                    onTap: () {
-                      context.read<AppLanguageCubit>().setLocaleByCode('ar');
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            );
-          },
+                    const SizedBox(height: 20),
+                    ListTile(
+                      title: Text(context.loc.t('language.turkish')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('tr');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.english')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('en');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.german')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('de');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.spanish')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('es');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.russian')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('ru');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.polish')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('pl');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.french')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('fr');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.portuguese')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('pt');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.italian')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('it');
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.loc.t('language.arabic')),
+                      onTap: () {
+                        context.read<AppLanguageCubit>().setLocaleByCode('ar');
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         );
       },
     );

@@ -1,0 +1,139 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "الرئيسية",
+    "search": "بحث",
+    "appointments": "المواعيد",
+    "profile": "الملف الشخصي"
+  },
+  "language": {
+    "selectTitle": "اختر اللغة",
+    "turkish": "التركية",
+    "english": "الإنجليزية",
+    "german": "الألمانية",
+    "spanish": "الإسبانية",
+    "russian": "الروسية",
+    "polish": "البولندية",
+    "french": "الفرنسية",
+    "portuguese": "البرتغالية",
+    "italian": "الإيطالية",
+    "arabic": "العربية"
+  },
+  "main": {
+    "heroTitleLine1": "عنوان رئيسي 1",
+    "heroTitleLine2": "عنوان رئيسي 2",
+    "heroDescription": "وصف رئيسي",
+    "signInButton": "تسجيل الدخول",
+    "createAccountButton": "إنشاء حساب"
+  },
+  "signIn": {
+    "loginSuccess": "تم تسجيل الدخول بنجاح",
+    "loginFailed": "فشل تسجيل الدخول",
+    "emailLabel": "البريد الإلكتروني",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "أدخل بريداً إلكترونياً صحيحاً",
+    "emailHint": "البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordMin": "يجب ألا تقل كلمة المرور عن 6 أحرف",
+    "passwordHint": "كلمة المرور",
+    "loginButton": "تسجيل الدخول"
+  },
+  "home": {
+    "location": "الموقع",
+    "greeting": "مرحباً",
+    "tagline": "اعثر على الرعاية المناسبة",
+    "searchHint": "بحث",
+    "offersTitle": "العروض",
+    "popularTitle": "شائع"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "خصم 20%",
+        "title": "باقة كاملة لزراعة الشعر",
+        "location": "شيشلي، إسطنبول"
+      },
+      {
+        "badge": "خصم 15%",
+        "title": "زراعة الشعر",
+        "location": "قادكوي، إسطنبول"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "زرعات الأسنان",
+        "provider": "One Clinic",
+        "price": "€1200",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "علاج البوتوكس",
+        "provider": "One Clinic",
+        "price": "€350",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "جراحة العيون بالليزر",
+        "provider": "One Clinic",
+        "price": "€950",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "الكل",
+      "hairTransplant": "زراعة الشعر",
+      "dentalAesthetic": "تجميل الأسنان",
+      "skinAesthetic": "تجميل الجلد",
+      "eyeSurgery": "جراحة العيون",
+      "orthopedics": "جراحة العظام"
+    }
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "userName": "أحمد يلماز",
+    "memberBadge": "عضو",
+    "editProfileButton": "تعديل الملف الشخصي",
+    "quickActionsTitle": "إجراءات سريعة",
+    "quickActions": {
+      "treatmentsTitle": "العلاجات",
+      "treatmentsSubtitle": "عرض علاجاتك",
+      "reportsTitle": "التقارير",
+      "reportsSubtitle": "عرض نتائج الفحوصات",
+      "prescriptionsTitle": "الوصفات",
+      "prescriptionsSubtitle": "إدارة الأدوية",
+      "supportTitle": "الدعم",
+      "supportSubtitle": "تواصل معنا"
+    },
+    "personalInfoTitle": "المعلومات الشخصية",
+    "emailLabel": "البريد الإلكتروني",
+    "phoneLabel": "الهاتف",
+    "countryLabel": "البلد/المنطقة",
+    "countryValue": "تركيا",
+    "appSettingsTitle": "إعدادات التطبيق",
+    "languageOption": "اللغة",
+    "languageValue": "العربية",
+    "notifications": "الإشعارات",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "تعديل الملف الشخصي",
+    "profilePhoto": "صورة الملف الشخصي",
+    "snackbarImagePicker": "تم فتح اختيار الصور",
+    "changePhotoHint": "تغيير الصورة",
+    "emailSectionTitle": "البريد الإلكتروني",
+    "emailHint": "البريد الإلكتروني",
+    "phoneSectionTitle": "الهاتف",
+    "phoneHint": "الهاتف",
+    "cancelButton": "إلغاء",
+    "snackbarProfileUpdated": "تم تحديث الملف الشخصي",
+    "saveButton": "حفظ"
+  }
+}

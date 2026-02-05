@@ -1,0 +1,139 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "Inicio",
+    "search": "Buscar",
+    "appointments": "Citas",
+    "profile": "Perfil"
+  },
+  "language": {
+    "selectTitle": "Seleccionar idioma",
+    "turkish": "Turco",
+    "english": "Inglés",
+    "german": "Alemán",
+    "spanish": "Español",
+    "russian": "Ruso",
+    "polish": "Polaco",
+    "french": "Francés",
+    "portuguese": "Portugués",
+    "italian": "Italiano",
+    "arabic": "Árabe"
+  },
+  "main": {
+    "heroTitleLine1": "Título héroe línea 1",
+    "heroTitleLine2": "Título héroe línea 2",
+    "heroDescription": "Descripción del héroe",
+    "signInButton": "Iniciar sesión",
+    "createAccountButton": "Crear cuenta"
+  },
+  "signIn": {
+    "loginSuccess": "Inicio de sesión exitoso",
+    "loginFailed": "Error al iniciar sesión",
+    "emailLabel": "Correo electrónico",
+    "emailRequired": "El correo es obligatorio",
+    "emailInvalid": "Ingresa un correo válido",
+    "emailHint": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMin": "La contraseña debe tener al menos 6 caracteres",
+    "passwordHint": "Contraseña",
+    "loginButton": "Iniciar sesión"
+  },
+  "home": {
+    "location": "Ubicación",
+    "greeting": "Hola",
+    "tagline": "Encuentra la atención adecuada",
+    "searchHint": "Buscar",
+    "offersTitle": "Ofertas",
+    "popularTitle": "Popular"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "20% de descuento",
+        "title": "Paquete completo de trasplante capilar",
+        "location": "Sisli, Estambul"
+      },
+      {
+        "badge": "15% de descuento",
+        "title": "Trasplante capilar",
+        "location": "Kadikoy, Estambul"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "Implantes dentales",
+        "provider": "One Clinic",
+        "price": "€1200",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Tratamiento de botox",
+        "provider": "One Clinic",
+        "price": "€350",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Cirugía ocular láser",
+        "provider": "One Clinic",
+        "price": "€950",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "Todos",
+      "hairTransplant": "Trasplante capilar",
+      "dentalAesthetic": "Estética dental",
+      "skinAesthetic": "Estética de la piel",
+      "eyeSurgery": "Cirugía ocular",
+      "orthopedics": "Ortopedia"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "userName": "Ahmet Yilmaz",
+    "memberBadge": "Miembro",
+    "editProfileButton": "Editar perfil",
+    "quickActionsTitle": "Acciones rápidas",
+    "quickActions": {
+      "treatmentsTitle": "Tratamientos",
+      "treatmentsSubtitle": "Ver tus tratamientos",
+      "reportsTitle": "Informes",
+      "reportsSubtitle": "Ver resultados de pruebas",
+      "prescriptionsTitle": "Recetas",
+      "prescriptionsSubtitle": "Gestionar medicamentos",
+      "supportTitle": "Soporte",
+      "supportSubtitle": "Chatea con nosotros"
+    },
+    "personalInfoTitle": "Información personal",
+    "emailLabel": "Correo electrónico",
+    "phoneLabel": "Teléfono",
+    "countryLabel": "País/Región",
+    "countryValue": "Turquía",
+    "appSettingsTitle": "Ajustes de la app",
+    "languageOption": "Idioma",
+    "languageValue": "Español",
+    "notifications": "Notificaciones",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "Editar perfil",
+    "profilePhoto": "Foto de perfil",
+    "snackbarImagePicker": "Selector de imágenes abierto",
+    "changePhotoHint": "Cambiar foto",
+    "emailSectionTitle": "Correo electrónico",
+    "emailHint": "Correo electrónico",
+    "phoneSectionTitle": "Teléfono",
+    "phoneHint": "Teléfono",
+    "cancelButton": "Cancelar",
+    "snackbarProfileUpdated": "Perfil actualizado",
+    "saveButton": "Guardar"
+  }
+}

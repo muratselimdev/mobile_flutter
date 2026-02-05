@@ -1,0 +1,139 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "Strona główna",
+    "search": "Szukaj",
+    "appointments": "Wizyty",
+    "profile": "Profil"
+  },
+  "language": {
+    "selectTitle": "Wybierz język",
+    "turkish": "Turecki",
+    "english": "Angielski",
+    "german": "Niemiecki",
+    "spanish": "Hiszpański",
+    "russian": "Rosyjski",
+    "polish": "Polski",
+    "french": "Francuski",
+    "portuguese": "Portugalski",
+    "italian": "Włoski",
+    "arabic": "Arabski"
+  },
+  "main": {
+    "heroTitleLine1": "Tytuł bohatera 1",
+    "heroTitleLine2": "Tytuł bohatera 2",
+    "heroDescription": "Opis bohatera",
+    "signInButton": "Zaloguj się",
+    "createAccountButton": "Utwórz konto"
+  },
+  "signIn": {
+    "loginSuccess": "Pomyślne logowanie",
+    "loginFailed": "Logowanie nieudane",
+    "emailLabel": "E-mail",
+    "emailRequired": "E-mail jest wymagany",
+    "emailInvalid": "Wpisz poprawny e-mail",
+    "emailHint": "E-mail",
+    "passwordLabel": "Hasło",
+    "passwordRequired": "Hasło jest wymagane",
+    "passwordMin": "Hasło musi mieć co najmniej 6 znaków",
+    "passwordHint": "Hasło",
+    "loginButton": "Zaloguj się"
+  },
+  "home": {
+    "location": "Lokalizacja",
+    "greeting": "Cześć",
+    "tagline": "Znajdź odpowiednią opiekę",
+    "searchHint": "Szukaj",
+    "offersTitle": "Oferty",
+    "popularTitle": "Popularne"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "20% zniżki",
+        "title": "Pełny pakiet przeszczepu włosów",
+        "location": "Sisli, Stambuł"
+      },
+      {
+        "badge": "15% zniżki",
+        "title": "Przeszczep włosów",
+        "location": "Kadikoy, Stambuł"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "Implanty dentystyczne",
+        "provider": "One Clinic",
+        "price": "€1200",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Zabieg botoksu",
+        "provider": "One Clinic",
+        "price": "€350",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Laserowa operacja oczu",
+        "provider": "One Clinic",
+        "price": "€950",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "Wszystkie",
+      "hairTransplant": "Przeszczep włosów",
+      "dentalAesthetic": "Estetyka stomatologiczna",
+      "skinAesthetic": "Estetyka skóry",
+      "eyeSurgery": "Chirurgia oka",
+      "orthopedics": "Ortopedia"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "userName": "Ahmet Yilmaz",
+    "memberBadge": "Członek",
+    "editProfileButton": "Edytuj profil",
+    "quickActionsTitle": "Szybkie akcje",
+    "quickActions": {
+      "treatmentsTitle": "Zabiegi",
+      "treatmentsSubtitle": "Zobacz swoje zabiegi",
+      "reportsTitle": "Raporty",
+      "reportsSubtitle": "Zobacz wyniki badań",
+      "prescriptionsTitle": "Recepty",
+      "prescriptionsSubtitle": "Zarządzaj lekami",
+      "supportTitle": "Wsparcie",
+      "supportSubtitle": "Czat z nami"
+    },
+    "personalInfoTitle": "Dane osobowe",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Telefon",
+    "countryLabel": "Kraj/Region",
+    "countryValue": "Turcja",
+    "appSettingsTitle": "Ustawienia aplikacji",
+    "languageOption": "Język",
+    "languageValue": "Polski",
+    "notifications": "Powiadomienia",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "Edytuj profil",
+    "profilePhoto": "Zdjęcie profilowe",
+    "snackbarImagePicker": "Otwarto wybór obrazów",
+    "changePhotoHint": "Zmień zdjęcie",
+    "emailSectionTitle": "E-mail",
+    "emailHint": "E-mail",
+    "phoneSectionTitle": "Telefon",
+    "phoneHint": "Telefon",
+    "cancelButton": "Anuluj",
+    "snackbarProfileUpdated": "Profil zaktualizowany",
+    "saveButton": "Zapisz"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "app": {
+    "name": "One Clinic",
+    "brandUpper": "ONE CLINIC"
+  },
+  "footer": {
+    "home": "Главная",
+    "search": "Поиск",
+    "appointments": "Записи",
+    "profile": "Профиль"
+  },
+  "language": {
+    "selectTitle": "Выберите язык",
+    "turkish": "Турецкий",
+    "english": "Английский",
+    "german": "Немецкий",
+    "spanish": "Испанский",
+    "russian": "Русский",
+    "polish": "Польский",
+    "french": "Французский",
+    "portuguese": "Португальский",
+    "italian": "Итальянский",
+    "arabic": "Арабский"
+  },
+  "main": {
+    "heroTitleLine1": "Заголовок героя 1",
+    "heroTitleLine2": "Заголовок героя 2",
+    "heroDescription": "Описание героя",
+    "signInButton": "Войти",
+    "createAccountButton": "Создать аккаунт"
+  },
+  "signIn": {
+    "loginSuccess": "Успешный вход",
+    "loginFailed": "Ошибка входа",
+    "emailLabel": "Эл. почта",
+    "emailRequired": "Эл. почта обязательна",
+    "emailInvalid": "Введите корректную эл. почту",
+    "emailHint": "Эл. почта",
+    "passwordLabel": "Пароль",
+    "passwordRequired": "Пароль обязателен",
+    "passwordMin": "Пароль должен быть не менее 6 символов",
+    "passwordHint": "Пароль",
+    "loginButton": "Войти"
+  },
+  "home": {
+    "location": "Местоположение",
+    "greeting": "Здравствуйте",
+    "tagline": "Найдите подходящее лечение",
+    "searchHint": "Поиск",
+    "offersTitle": "Предложения",
+    "popularTitle": "Популярное"
+  },
+  "offers": {
+    "items": [
+      {
+        "badge": "Скидка 20%",
+        "title": "Полный пакет пересадки волос",
+        "location": "Шишли, Стамбул"
+      },
+      {
+        "badge": "Скидка 15%",
+        "title": "Пересадка волос",
+        "location": "Кадыкёй, Стамбул"
+      }
+    ]
+  },
+  "popularServices": {
+    "items": [
+      {
+        "title": "Зубные импланты",
+        "provider": "One Clinic",
+        "price": "€1200",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Ботокс",
+        "provider": "One Clinic",
+        "price": "€350",
+        "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "title": "Лазерная хирургия глаз",
+        "provider": "One Clinic",
+        "price": "€950",
+        "imageUrl": "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "categories": {
+    "names": {
+      "all": "Все",
+      "hairTransplant": "Пересадка волос",
+      "dentalAesthetic": "Стоматологическая эстетика",
+      "skinAesthetic": "Эстетика кожи",
+      "eyeSurgery": "Хирургия глаз",
+      "orthopedics": "Ортопедия"
+    }
+  },
+  "profile": {
+    "title": "Профиль",
+    "userName": "Ахмет Йылмаз",
+    "memberBadge": "Участник",
+    "editProfileButton": "Редактировать профиль",
+    "quickActionsTitle": "Быстрые действия",
+    "quickActions": {
+      "treatmentsTitle": "Лечение",
+      "treatmentsSubtitle": "Посмотреть лечение",
+      "reportsTitle": "Отчеты",
+      "reportsSubtitle": "Посмотреть результаты",
+      "prescriptionsTitle": "Рецепты",
+      "prescriptionsSubtitle": "Управлять лекарствами",
+      "supportTitle": "Поддержка",
+      "supportSubtitle": "Чат с нами"
+    },
+    "personalInfoTitle": "Личная информация",
+    "emailLabel": "Эл. почта",
+    "phoneLabel": "Телефон",
+    "countryLabel": "Страна/Регион",
+    "countryValue": "Турция",
+    "appSettingsTitle": "Настройки приложения",
+    "languageOption": "Язык",
+    "languageValue": "Русский",
+    "notifications": "Уведомления",
+    "faceId": "Face ID"
+  },
+  "editProfile": {
+    "title": "Редактировать профиль",
+    "profilePhoto": "Фото профиля",
+    "snackbarImagePicker": "Открыт выбор изображения",
+    "changePhotoHint": "Изменить фото",
+    "emailSectionTitle": "Эл. почта",
+    "emailHint": "Эл. почта",
+    "phoneSectionTitle": "Телефон",
+    "phoneHint": "Телефон",
+    "cancelButton": "Отмена",
+    "snackbarProfileUpdated": "Профиль обновлен",
+    "saveButton": "Сохранить"
+  }
+}
