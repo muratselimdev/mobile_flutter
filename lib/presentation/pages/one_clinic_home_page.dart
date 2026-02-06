@@ -6,6 +6,8 @@ import '../localization/app_localizations.dart';
 import '../widgets/app_footer.dart';
 import '../../data/models/popular_service.dart';
 import '../../data/services/popular_service_api.dart';
+import '../../data/models/campaign.dart';
+import '../../data/services/campaign_api.dart';
 import 'one_clinic_profile_page.dart';
 
 class OneClinicHomePage extends StatefulWidget {
@@ -20,19 +22,27 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   bool _isDropdownExpanded = true;
   int _currentTabIndex = 0;
   final PopularServiceApi _popularServiceApi = PopularServiceApi();
+  final CampaignApi _campaignApi = CampaignApi();
   final List<PopularService> _popularPool = [];
   final List<PopularService> _visiblePopularServices = [];
+  final List<_OfferItem> _offers = [];
   Timer? _popularRefreshTimer;
   Timer? _popularShuffleTimer;
+  Timer? _campaignRefreshTimer;
   final Random _random = Random();
 
   @override
   void initState() {
     super.initState();
+    _fetchCampaigns();
     _fetchPopularServices();
     _popularRefreshTimer = Timer.periodic(
       const Duration(seconds: 30),
       (_) => _fetchPopularServices(),
+    );
+    _campaignRefreshTimer = Timer.periodic(
+      const Duration(seconds: 30),
+      (_) => _fetchCampaigns(),
     );
     _popularShuffleTimer = Timer.periodic(
       const Duration(seconds: 10),
@@ -44,6 +54,7 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   void dispose() {
     _popularRefreshTimer?.cancel();
     _popularShuffleTimer?.cancel();
+    _campaignRefreshTimer?.cancel();
     super.dispose();
   }
 
@@ -84,13 +95,7 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       ),
     ];
 
-    final offers = loc.mapList('offers.items').map((item) {
-      return _OfferItem(
-        badge: item['badge']?.toString() ?? '',
-        title: item['title']?.toString() ?? '',
-        location: item['location']?.toString() ?? '',
-      );
-    }).toList();
+    final offers = _offers.isNotEmpty ? _offers : _buildLocalOffers(loc);
 
     final localPopularServices = _buildLocalPopularServices(loc);
     final popularServices = _visiblePopularServices.isNotEmpty
@@ -316,7 +321,7 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
             ),
             const SizedBox(height: 12),
             SizedBox(
-              height: 120,
+              height: 180,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: offers.length,
@@ -381,6 +386,60 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
         .toList();
   }
 
+  List<_OfferItem> _buildLocalOffers(AppLocalizations loc) {
+    return loc
+        .mapList('offers.items')
+        .map((item) {
+          return _OfferItem(
+            description: item['title']?.toString() ?? '',
+            title: item['location']?.toString() ?? '',
+            discountRate: _parseDiscountRate(item['badge']),
+            imageUrl: item['imageUrl']?.toString() ?? '',
+          );
+        })
+        .where((item) => item.description.trim().isNotEmpty)
+        .toList();
+  }
+
+  int _parseDiscountRate(dynamic value) {
+    if (value == null) return 0;
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    final text = value.toString().replaceAll('%', '').trim();
+    return int.tryParse(text) ?? 0;
+  }
+
+  Future<void> _fetchCampaigns() async {
+    if (!mounted) return;
+    final fallback = _buildLocalOffers(context.loc);
+    try {
+      final remote = await _campaignApi.fetchCampaigns();
+      final mapped = remote.map(_mapCampaignToOffer).toList();
+      if (!mounted) return;
+      _setOffers(mapped.isNotEmpty ? mapped : fallback);
+    } catch (_) {
+      if (!mounted) return;
+      _setOffers(fallback);
+    }
+  }
+
+  _OfferItem _mapCampaignToOffer(Campaign campaign) {
+    return _OfferItem(
+      description: campaign.description,
+      title: campaign.title,
+      discountRate: campaign.discountRate,
+      imageUrl: campaign.imageUrl,
+    );
+  }
+
+  void _setOffers(List<_OfferItem> offers) {
+    setState(() {
+      _offers
+        ..clear()
+        ..addAll(offers);
+    });
+  }
+
   Future<void> _fetchPopularServices() async {
     if (!mounted) return;
     final localFallback = _buildLocalPopularServices(context.loc);
@@ -424,14 +483,16 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
 }
 
 class _OfferItem {
-  final String badge;
+  final String description;
   final String title;
-  final String location;
+  final int discountRate;
+  final String imageUrl;
 
   const _OfferItem({
-    required this.badge,
+    required this.description,
     required this.title,
-    required this.location,
+    required this.discountRate,
+    required this.imageUrl,
   });
 }
 
@@ -454,9 +515,12 @@ class _OfferCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl = item.imageUrl.isNotEmpty
+        ? item.imageUrl
+        : 'https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&w=800&q=80';
     return Container(
-      width: 220,
-      padding: const EdgeInsets.all(12),
+      width: 280,
+      padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -468,39 +532,96 @@ class _OfferCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: const Color(0xFF16A34A),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Text(
-              item.badge,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[200],
+                    child: const Icon(
+                      Icons.image_not_supported,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            item.title,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black.withValues(alpha: 0.05),
+                      Colors.black.withValues(alpha: 0.6),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            item.location,
-            style: const TextStyle(color: Colors.black54, fontSize: 12),
-          ),
-        ],
+            Positioned(
+              top: 12,
+              left: 12,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF16A34A),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Text(
+                  item.discountRate > 0
+                      ? '%${item.discountRate} indirim'
+                      : 'İndirim',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              left: 12,
+              right: 12,
+              bottom: 16,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    item.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.85),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
