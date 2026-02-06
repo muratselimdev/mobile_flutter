@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import '../localization/app_localizations.dart';
 import '../widgets/app_footer.dart';
+import '../../data/models/popular_service.dart';
+import '../../data/services/popular_service_api.dart';
 import 'one_clinic_profile_page.dart';
 
 class OneClinicHomePage extends StatefulWidget {
@@ -14,6 +19,33 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   int _selectedCategoryIndex = 0;
   bool _isDropdownExpanded = true;
   int _currentTabIndex = 0;
+  final PopularServiceApi _popularServiceApi = PopularServiceApi();
+  final List<PopularService> _popularPool = [];
+  final List<PopularService> _visiblePopularServices = [];
+  Timer? _popularRefreshTimer;
+  Timer? _popularShuffleTimer;
+  final Random _random = Random();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPopularServices();
+    _popularRefreshTimer = Timer.periodic(
+      const Duration(seconds: 30),
+      (_) => _fetchPopularServices(),
+    );
+    _popularShuffleTimer = Timer.periodic(
+      const Duration(seconds: 10),
+      (_) => _shufflePopularServices(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _popularRefreshTimer?.cancel();
+    _popularShuffleTimer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +92,10 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       );
     }).toList();
 
-    final popularServices = loc.mapList('popularServices.items').map((item) {
-      return _PopularService(
-        title: item['title']?.toString() ?? '',
-        provider: item['provider']?.toString() ?? '',
-        rating: 4.8,
-        reviews: 85,
-        price: item['price']?.toString() ?? '',
-        imageUrl:
-            item['imageUrl']?.toString() ??
-            'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=240&q=80',
-      );
-    }).toList();
+    final localPopularServices = _buildLocalPopularServices(loc);
+    final popularServices = _visiblePopularServices.isNotEmpty
+        ? _visiblePopularServices
+        : localPopularServices.take(3).toList();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
@@ -337,6 +361,66 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       ),
     );
   }
+
+  List<PopularService> _buildLocalPopularServices(AppLocalizations loc) {
+    return loc
+        .mapList('popularServices.items')
+        .map((item) {
+          return PopularService(
+            title: item['title']?.toString() ?? '',
+            provider: item['provider']?.toString() ?? '',
+            rating: 4.8,
+            reviews: 85,
+            price: item['price']?.toString() ?? '',
+            imageUrl:
+                item['imageUrl']?.toString() ??
+                'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=240&q=80',
+          );
+        })
+        .where((service) => service.title.isNotEmpty)
+        .toList();
+  }
+
+  Future<void> _fetchPopularServices() async {
+    if (!mounted) return;
+    final localFallback = _buildLocalPopularServices(context.loc);
+    try {
+      final remote = await _popularServiceApi.fetchPopularServices();
+      final pool = remote.isNotEmpty ? remote : localFallback;
+      if (!mounted) return;
+      _setPopularPool(pool);
+    } catch (_) {
+      if (!mounted) return;
+      _setPopularPool(localFallback);
+    }
+  }
+
+  void _setPopularPool(List<PopularService> pool) {
+    setState(() {
+      _popularPool
+        ..clear()
+        ..addAll(pool.where((item) => item.title.trim().isNotEmpty));
+      _visiblePopularServices
+        ..clear()
+        ..addAll(_pickRandomPopular(_popularPool));
+    });
+  }
+
+  void _shufflePopularServices() {
+    if (!mounted || _popularPool.isEmpty) return;
+    setState(() {
+      _visiblePopularServices
+        ..clear()
+        ..addAll(_pickRandomPopular(_popularPool));
+    });
+  }
+
+  List<PopularService> _pickRandomPopular(List<PopularService> pool) {
+    if (pool.isEmpty) return const <PopularService>[];
+    final shuffled = List<PopularService>.from(pool)..shuffle(_random);
+    final count = shuffled.length < 3 ? shuffled.length : 3;
+    return shuffled.take(count).toList();
+  }
 }
 
 class _OfferItem {
@@ -360,24 +444,6 @@ class _Category {
     required this.name,
     required this.icon,
     required this.items,
-  });
-}
-
-class _PopularService {
-  final String title;
-  final String provider;
-  final double rating;
-  final int reviews;
-  final String price;
-  final String imageUrl;
-
-  const _PopularService({
-    required this.title,
-    required this.provider,
-    required this.rating,
-    required this.reviews,
-    required this.price,
-    required this.imageUrl,
   });
 }
 
@@ -441,7 +507,7 @@ class _OfferCard extends StatelessWidget {
 }
 
 class _PopularServiceCard extends StatelessWidget {
-  final _PopularService service;
+  final PopularService service;
 
   const _PopularServiceCard({required this.service});
 
