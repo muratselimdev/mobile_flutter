@@ -35,8 +35,8 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchCampaigns();
-    _fetchPopularServices();
+    // Fetch both campaigns and popular services in parallel for better performance
+    _fetchInitialData();
     _popularRefreshTimer = Timer.periodic(
       const Duration(seconds: 30),
       (_) => _fetchPopularServices(),
@@ -49,6 +49,11 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       const Duration(seconds: 10),
       (_) => _shufflePopularServices(),
     );
+  }
+
+  Future<void> _fetchInitialData() async {
+    // Run both API calls in parallel instead of sequentially
+    await Future.wait([_fetchCampaigns(), _fetchPopularServices()]);
   }
 
   @override
