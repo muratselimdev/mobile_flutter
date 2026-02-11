@@ -1,7 +1,7 @@
 {
-  "buildCommand": "echo 'No build needed'",
+  "buildCommand": "flutter build web --release",
   "outputDirectory": "build/web",
-  "installCommand": "echo 'No install needed'",
+  "installCommand": "flutter pub get",
   "rewrites": [
     {
       "source": "/(.*)",
