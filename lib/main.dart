@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'presentation/bloc/app_language_cubit.dart';
+import 'presentation/bloc/location_cubit.dart';
+import 'data/services/location_service.dart';
 import 'presentation/localization/app_localizations.dart';
 import 'presentation/pages/one_clinic_main_page.dart';
 
@@ -16,7 +18,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => AppLanguageCubit())],
+      providers: [
+        BlocProvider(create: (_) => AppLanguageCubit()),
+        BlocProvider(
+          create: (_) =>
+              LocationCubit(locationService: LocationService())
+                ..getCurrentLocation(),
+        ),
+      ],
       child: BlocBuilder<AppLanguageCubit, Locale>(
         builder: (context, locale) {
           return MaterialApp(

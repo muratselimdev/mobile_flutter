@@ -2,13 +2,14 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/location_cubit.dart';
+import '../bloc/location_state.dart';
 import '../localization/app_localizations.dart';
-import '../widgets/app_footer.dart';
 import '../../data/models/popular_service.dart';
 import '../../data/services/popular_service_api.dart';
 import '../../data/models/campaign.dart';
 import '../../data/services/campaign_api.dart';
-import 'one_clinic_profile_page.dart';
 import 'one_clinic_campaign_detail_page.dart';
 
 class OneClinicHomePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class OneClinicHomePage extends StatefulWidget {
 class _OneClinicHomePageState extends State<OneClinicHomePage> {
   int _selectedCategoryIndex = 0;
   bool _isDropdownExpanded = true;
-  int _currentTabIndex = 0;
+  // int _currentTabIndex = 0; // REPLACED: Removed logic for internal tab index
   final PopularServiceApi _popularServiceApi = PopularServiceApi();
   final CampaignApi _campaignApi = CampaignApi();
   final List<PopularService> _popularPool = [];
@@ -113,12 +114,50 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
-          loc.t('app.name'),
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              loc.t('app.name'),
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
+            ),
+            BlocBuilder<LocationCubit, LocationState>(
+              builder: (context, state) {
+                if (state.status == LocationStatus.success &&
+                    state.placemark != null) {
+                  final place = state.placemark!;
+                  final locationText = [
+                    place.locality,
+                    place.country,
+                  ].where((e) => e != null && e.isNotEmpty).join(', ');
+
+                  return Row(
+                    children: [
+                      const Icon(
+                        Icons.location_on,
+                        size: 14,
+                        color: Color(0xFF16A34A),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        locationText,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -365,24 +404,6 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: AppFooter(
-        currentIndex: _currentTabIndex,
-        onTap: (index) {
-          if (index == 3) {
-            // Navigate to Profile page
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const OneClinicProfilePage(),
-              ),
-            );
-          } else {
-            setState(() {
-              _currentTabIndex = index;
-            });
-          }
-        },
       ),
     );
   }

@@ -251,7 +251,8 @@ class OneClinicCampaignDetailPage extends StatelessWidget {
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: _specialists.length,
-                        separatorBuilder: (_, __) => const SizedBox(width: 12),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(width: 12),
                         itemBuilder: (context, index) {
                           final specialist = _specialists[index];
                           return _SpecialistCard(specialist: specialist);
