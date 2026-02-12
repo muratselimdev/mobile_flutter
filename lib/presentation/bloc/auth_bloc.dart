@@ -38,6 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             status: AuthStatus.authenticated,
             token: response.token,
             userData: response.data,
+            user: response.user,
           ),
         );
       } else {
@@ -78,6 +79,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             status: AuthStatus.authenticated,
             token: response.token,
             userData: response.data,
+            user: response.user,
           ),
         );
       } else {

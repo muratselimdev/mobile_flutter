@@ -57,11 +57,17 @@ class AuthService {
     try {
       final url = Uri.parse('$baseUrl/customer/auth/login');
 
+      print('Login Request URL: $url');
+      print('Login Request Body: ${jsonEncode(request.toJson())}');
+
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(request.toJson()),
       );
+
+      print('Login Response Status: ${response.statusCode}');
+      print('Login Response Body: ${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
@@ -75,6 +81,7 @@ class AuthService {
         );
       }
     } catch (e) {
+      print('Login Exception: $e');
       return LoginResponse(success: false, message: null);
     }
   }
