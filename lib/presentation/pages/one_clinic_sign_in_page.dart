@@ -559,13 +559,29 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                                   GoogleSignInConfig.scopes,
                                             );
 
-                                        messenger.showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Logged in as ${account.email}',
-                                            ),
-                                            backgroundColor: const Color(
-                                              0xFF16A34A,
+                                        // Parse display name into first and last name
+                                        String? firstName;
+                                        String? lastName;
+                                        if (account.displayName != null) {
+                                          final nameParts = account.displayName!
+                                              .split(' ');
+                                          firstName = nameParts.isNotEmpty
+                                              ? nameParts.first
+                                              : null;
+                                          lastName = nameParts.length > 1
+                                              ? nameParts.sublist(1).join(' ')
+                                              : null;
+                                        }
+
+                                        // Navigate to sign-up page with Google account info
+                                        if (!mounted) return;
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => OneClinicSignUpPage(
+                                              firstName: firstName,
+                                              lastName: lastName,
+                                              email: account.email,
                                             ),
                                           ),
                                         );

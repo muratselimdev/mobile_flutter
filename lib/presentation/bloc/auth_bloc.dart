@@ -25,7 +25,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         lastName: event.lastName,
         email: event.email,
         password: event.password,
-        phoneNumber: event.phoneNumber,
+        phone: event.phoneNumber,
+        country: event.country ?? 'TR',
+        languageGroupId: event.languageGroupId ?? 0,
       );
 
       final response = await authService.register(request);

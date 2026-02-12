@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/services/auth_service.dart';
 import '../../data/services/country_data.dart';
+import '../../data/services/language_group_service.dart';
 import '../../data/models/country.dart';
+import '../../data/models/language_group.dart';
 import '../bloc/app_language_cubit.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
@@ -10,7 +12,16 @@ import '../bloc/auth_state.dart';
 import 'main_tab_page.dart';
 
 class OneClinicSignUpPage extends StatefulWidget {
-  const OneClinicSignUpPage({super.key});
+  const OneClinicSignUpPage({
+    super.key,
+    this.firstName,
+    this.lastName,
+    this.email,
+  });
+
+  final String? firstName;
+  final String? lastName;
+  final String? email;
 
   @override
   State<OneClinicSignUpPage> createState() => _OneClinicSignUpPageState();
@@ -27,7 +38,10 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
 
   Country? _selectedCountry;
   Country? _selectedPhoneCountry;
-  String? _selectedLanguage;
+  LanguageGroup? _selectedLanguageGroup;
+  List<LanguageGroup> _languageGroups = [];
+  bool _isLoadingLanguages = true;
+  final _languageGroupService = LanguageGroupService();
 
   @override
   void initState() {
@@ -35,13 +49,54 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
     // Set default country to Turkey
     _selectedCountry = CountryData.getCountryByCode('TR');
     _selectedPhoneCountry = CountryData.getCountryByCode('TR');
-    // Get current language from context
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final currentLang = context.read<AppLanguageCubit>().state.languageCode;
+
+    // Pre-fill form with Google account data if provided
+    if (widget.firstName != null) {
+      _firstNameController.text = widget.firstName!;
+    }
+    if (widget.lastName != null) {
+      _lastNameController.text = widget.lastName!;
+    }
+    if (widget.email != null) {
+      _emailController.text = widget.email!;
+    }
+
+    // Fetch language groups from backend
+    _loadLanguageGroups();
+  }
+
+  Future<void> _loadLanguageGroups() async {
+    try {
+      final languages = await _languageGroupService.fetchLanguageGroups();
       setState(() {
-        _selectedLanguage = currentLang;
+        _languageGroups = languages;
+        _isLoadingLanguages = false;
+
+        // Set default language group based on current app language
+        if (mounted) {
+          final currentLang = context
+              .read<AppLanguageCubit>()
+              .state
+              .languageCode;
+          _selectedLanguageGroup = _languageGroups.firstWhere(
+            (lg) => lg.code.toLowerCase() == currentLang.toLowerCase(),
+            orElse: () => _languageGroups.isNotEmpty
+                ? _languageGroups.first
+                : LanguageGroup(
+                    id: 0,
+                    name: 'English',
+                    code: 'en',
+                    isActive: true,
+                  ),
+          );
+        }
       });
-    });
+    } catch (e) {
+      setState(() {
+        _isLoadingLanguages = false;
+      });
+      print('Error loading language groups: $e');
+    }
   }
 
   @override
@@ -305,6 +360,9 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
           ? '${_selectedPhoneCountry!.dialCode}${_phoneController.text.trim()}'
           : _phoneController.text.trim();
 
+      // Use language group ID from backend
+      final languageGroupId = _selectedLanguageGroup?.id ?? 0;
+
       context.read<AuthBloc>().add(
         RegisterSubmitted(
           firstName: _firstNameController.text.trim(),
@@ -312,6 +370,8 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
           email: _emailController.text.trim(),
           phoneNumber: fullPhone,
           password: _passwordController.text,
+          country: _selectedCountry?.code ?? 'TR',
+          languageGroupId: languageGroupId,
         ),
       );
     }
@@ -516,19 +576,6 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
   }
 
   Widget _buildLanguageDropdown() {
-    final languages = [
-      {'code': 'en', 'name': 'English', 'flag': '🇬🇧'},
-      {'code': 'tr', 'name': 'Türkçe', 'flag': '🇹🇷'},
-      {'code': 'de', 'name': 'Deutsch', 'flag': '🇩🇪'},
-      {'code': 'es', 'name': 'Español', 'flag': '🇪🇸'},
-      {'code': 'fr', 'name': 'Français', 'flag': '🇫🇷'},
-      {'code': 'it', 'name': 'Italiano', 'flag': '🇮🇹'},
-      {'code': 'ru', 'name': 'Русский', 'flag': '🇷🇺'},
-      {'code': 'pl', 'name': 'Polski', 'flag': '🇵🇱'},
-      {'code': 'pt', 'name': 'Português', 'flag': '🇵🇹'},
-      {'code': 'ar', 'name': 'العربية', 'flag': '🇸🇦'},
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -541,60 +588,76 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
           ),
         ),
         const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          initialValue: _selectedLanguage,
-          isExpanded: true,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFFF8FAFC),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.black12),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.black12),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF16A34A)),
-            ),
-          ),
-          items: languages.map((lang) {
-            return DropdownMenuItem<String>(
-              value: lang['code'] as String,
-              child: Row(
-                children: [
-                  Text(
-                    lang['flag'] as String,
-                    style: const TextStyle(fontSize: 16),
+        _isLoadingLanguages
+            ? Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF8FAFC),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black12),
+                ),
+                child: const Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    SizedBox(width: 12),
+                    Text('Loading languages...'),
+                  ],
+                ),
+              )
+            : DropdownButtonFormField<LanguageGroup>(
+                value: _selectedLanguageGroup,
+                isExpanded: true,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF8FAFC),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.black12),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.black12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF16A34A)),
+                  ),
+                ),
+                items: _languageGroups.map((languageGroup) {
+                  return DropdownMenuItem<LanguageGroup>(
+                    value: languageGroup,
                     child: Text(
-                      lang['name'] as String,
+                      languageGroup.name,
                       style: const TextStyle(fontSize: 14),
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                  );
+                }).toList(),
+                onChanged: (LanguageGroup? value) {
+                  if (value != null) {
+                    setState(() {
+                      _selectedLanguageGroup = value;
+                    });
+                    // Change app language when user selects different language
+                    context.read<AppLanguageCubit>().setLocaleByCode(
+                      value.code.toLowerCase(),
+                    );
+                  }
+                },
+                validator: (value) =>
+                    value == null ? 'Language is required' : null,
               ),
-            );
-          }).toList(),
-          onChanged: (String? value) {
-            if (value != null) {
-              setState(() {
-                _selectedLanguage = value;
-              });
-              context.read<AppLanguageCubit>().setLocaleByCode(value);
-            }
-          },
-          validator: (value) => value == null ? 'Language is required' : null,
-        ),
       ],
     );
   }

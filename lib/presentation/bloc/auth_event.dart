@@ -25,6 +25,8 @@ class RegisterSubmitted extends AuthEvent {
   final String email;
   final String password;
   final String phoneNumber;
+  final String? country;
+  final int? languageGroupId;
 
   const RegisterSubmitted({
     required this.firstName,
@@ -32,6 +34,8 @@ class RegisterSubmitted extends AuthEvent {
     required this.email,
     required this.password,
     required this.phoneNumber,
+    this.country,
+    this.languageGroupId,
   });
 
   @override
@@ -41,5 +45,7 @@ class RegisterSubmitted extends AuthEvent {
     email,
     password,
     phoneNumber,
+    country,
+    languageGroupId,
   ];
 }
