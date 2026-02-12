@@ -331,7 +331,7 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<Country>(
-          value: _selectedCountry,
+          initialValue: _selectedCountry,
           isExpanded: true,
           decoration: InputDecoration(
             filled: true,
@@ -402,7 +402,7 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
             SizedBox(
               width: 110,
               child: DropdownButtonFormField<Country>(
-                value: _selectedPhoneCountry,
+                initialValue: _selectedPhoneCountry,
                 isExpanded: true,
                 decoration: InputDecoration(
                   filled: true,
@@ -438,21 +438,24 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
                 items: CountryData.countries.map((country) {
                   return DropdownMenuItem<Country>(
                     value: country,
-                    child: Row(
-                      children: [
-                        Text(
-                          country.flag,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        const SizedBox(width: 6),
-                        Flexible(
-                          child: Text(
-                            '${country.dialCode} ${country.name}',
-                            style: const TextStyle(fontSize: 12),
-                            overflow: TextOverflow.ellipsis,
+                    child: SizedBox(
+                      width: 240,
+                      child: Row(
+                        children: [
+                          Text(
+                            country.flag,
+                            style: const TextStyle(fontSize: 16),
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              '${country.dialCode} ${country.name}',
+                              style: const TextStyle(fontSize: 12),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }).toList(),
@@ -539,7 +542,7 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: _selectedLanguage,
+          initialValue: _selectedLanguage,
           isExpanded: true,
           decoration: InputDecoration(
             filled: true,

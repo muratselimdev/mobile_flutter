@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../data/services/auth_service.dart';
+import '../../data/services/google_signin_config.dart';
 import '../bloc/app_language_cubit.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
@@ -23,6 +24,17 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize Google Sign-In with Web Client ID
+    if (GoogleSignInConfig.isConfigured) {
+      GoogleSignIn.instance.initialize(
+        clientId: GoogleSignInConfig.webClientId,
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -523,11 +535,30 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                       final messenger = ScaffoldMessenger.of(
                                         context,
                                       );
+
+                                      // Check if Web Client ID is configured
+                                      if (!GoogleSignInConfig.isConfigured) {
+                                        messenger.showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Google Sign-In is not configured. Please add your Web Client ID in google_signin_config.dart',
+                                            ),
+                                            backgroundColor: Colors.orange,
+                                            duration: Duration(seconds: 4),
+                                          ),
+                                        );
+                                        return;
+                                      }
+
                                       try {
                                         // Try to sign in with Google
                                         final account = await GoogleSignIn
                                             .instance
-                                            .authenticate(scopeHint: ['email']);
+                                            .authenticate(
+                                              scopeHint:
+                                                  GoogleSignInConfig.scopes,
+                                            );
+
                                         messenger.showSnackBar(
                                           SnackBar(
                                             content: Text(
@@ -542,12 +573,12 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                         // Show user-friendly error message
                                         messenger.showSnackBar(
                                           SnackBar(
-                                            content: const Text(
-                                              'Google Sign-In not configured. Please use email/password to login.',
+                                            content: Text(
+                                              'Google Sign-In failed: ${error.toString()}',
                                             ),
-                                            backgroundColor: Colors.orange,
+                                            backgroundColor: Colors.red,
                                             duration: const Duration(
-                                              seconds: 3,
+                                              seconds: 4,
                                             ),
                                           ),
                                         );

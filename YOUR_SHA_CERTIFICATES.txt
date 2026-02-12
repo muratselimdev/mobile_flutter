@@ -1,0 +1,62 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   YOUR SHA CERTIFICATE FINGERPRINTS                      ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Package Name: com.example.one_clinic_app
+
+SHA-1 (Copy this for Google Cloud Console):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3C:80:EB:1C:02:A3:DC:DF:0B:07:7C:FD:E8:D9:71:52:5D:F1:37:28
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SHA-256 (Optional, for reference):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+B9:4A:AD:AB:C4:4E:6B:F9:FF:1D:F1:F5:C9:27:D8:A6:E3:02:68:1A:94:6D:6D:16:00:1E:D7:F4:B9:39:92:08
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   NEXT STEPS - GOOGLE CLOUD CONSOLE                      ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+1. Go to: https://console.cloud.google.com/apis/credentials
+
+2. Login as: flutterauth2026@gmail.com
+
+3. Select project: for-google-login
+
+4. CREATE ANDROID OAUTH CLIENT:
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Click: "+ CREATE CREDENTIALS" → "OAuth client ID"
+   • Application type: Android
+   • Name: One Clinic Android
+   • Package name: com.example.one_clinic_app
+   • SHA-1: 3C:80:EB:1C:02:A3:DC:DF:0B:07:7C:FD:E8:D9:71:52:5D:F1:37:28
+   • Click: CREATE
+
+5. CREATE WEB OAUTH CLIENT (CRITICAL!):
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   • Click: "+ CREATE CREDENTIALS" → "OAuth client ID"
+   • Application type: Web application
+   • Name: One Clinic Web
+   • Click: CREATE
+   • 📋 COPY THE CLIENT ID (looks like: xxxxx-yyyyy.apps.googleusercontent.com)
+
+6. UPDATE YOUR APP:
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Edit: lib/data/services/google_signin_config.dart
+   
+   Replace:
+   static const String webClientId =
+       "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com";
+   
+   With your actual Web Client ID from step 5
+
+7. TEST:
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   flutter clean
+   flutter pub get
+   flutter run
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║ IMPORTANT: You need BOTH Android AND Web OAuth clients for this to work!║
+╚══════════════════════════════════════════════════════════════════════════╝

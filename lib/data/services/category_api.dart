@@ -1,31 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/campaign.dart';
+import '../models/category.dart';
 
-class CampaignApi {
-  CampaignApi({http.Client? client}) : _client = client ?? http.Client();
+class CategoryApi {
+  CategoryApi({http.Client? client}) : _client = client ?? http.Client();
 
   final http.Client _client;
 
-  Future<List<Campaign>> fetchCampaigns() async {
+  Future<List<Category>> fetchCategories() async {
     final uri = Uri.parse('https://system.one-clinic.net:5001/api/mobile/home');
     final response = await _client.get(uri);
     if (response.statusCode < 200 || response.statusCode >= 300) {
-      throw Exception('Failed to fetch campaigns');
+      throw Exception('Failed to fetch categories');
     }
 
     final decoded = json.decode(response.body);
     final list = _extractList(decoded);
-    final baseUrl = uri.origin;
     return list
         .whereType<Map>()
-        .map(
-          (item) => Campaign.fromMap(
-            Map<String, dynamic>.from(item),
-            baseUrl: baseUrl,
-          ),
-        )
-        .where((item) => item.description.trim().isNotEmpty)
+        .map((item) => Category.fromMap(Map<String, dynamic>.from(item)))
         .toList();
   }
 
@@ -35,7 +28,7 @@ class CampaignApi {
     }
     if (decoded is Map<String, dynamic>) {
       final candidates = [
-        decoded['campaigns'],
+        decoded['categories'],
         decoded['data'],
         decoded['items'],
         decoded['result'],
@@ -46,6 +39,6 @@ class CampaignApi {
         }
       }
     }
-    return const <dynamic>[];
+    return [];
   }
 }

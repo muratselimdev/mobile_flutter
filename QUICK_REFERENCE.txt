@@ -1,0 +1,136 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   GOOGLE SIGN-IN ANDROID - QUICK REFERENCE               ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+📧 Google Account: flutterauth2026@gmail.com
+🔧 Project: for-google-login
+📦 Package: com.example.one_clinic_app
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ STEP 1: GET SHA-1 FINGERPRINT                                            │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Run this command:
+    ./get_sha1_alternative.sh
+
+Or use Android Studio:
+    1. Open project in Android Studio
+    2. Terminal → cd android
+    3. Run: ./gradlew signingReport
+    4. Copy SHA1 from "Variant: debug"
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ STEP 2: GOOGLE CLOUD CONSOLE                                             │
+└──────────────────────────────────────────────────────────────────────────┘
+
+URL: https://console.cloud.google.com/apis/credentials
+
+✅ Enable APIs:
+   - APIs & Services → Library
+   - Enable "Google Sign-In API"
+
+✅ OAuth Consent Screen:
+   - User Type: External
+   - App name: One Clinic App
+   - Scopes: email, profile
+
+✅ Create Credentials:
+
+   1️⃣ Android OAuth Client:
+      Type: Android
+      Name: One Clinic Android
+      Package: com.example.one_clinic_app
+      SHA-1: [YOUR SHA-1 FROM STEP 1]
+
+   2️⃣ Web OAuth Client (CRITICAL!):
+      Type: Web application
+      Name: One Clinic Web
+      📋 COPY THE CLIENT ID! (looks like: xxxxx.apps.googleusercontent.com)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ STEP 3: UPDATE YOUR APP                                                  │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Edit this file:
+    lib/data/services/google_signin_config.dart
+
+Replace:
+    static const String webClientId = 
+        "YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com";
+
+With your actual Web Client ID from Step 2 #2️⃣
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ STEP 4: BUILD AND TEST                                                   │
+└──────────────────────────────────────────────────────────────────────────┘
+
+    flutter clean
+    flutter pub get
+    flutter run
+
+Test on Android device/emulator:
+    - Tap "Sign in with Google" button
+    - Select Google account
+    - Should see "Logged in as [email]"
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ FILES CREATED/MODIFIED                                                    │
+└──────────────────────────────────────────────────────────────────────────┘
+
+✅ Created:
+   • ANDROID_GOOGLE_SIGNIN_CONFIG.md (detailed guide)
+   • GOOGLE_SIGNIN_ANDROID_SETUP_SUMMARY.md (complete summary)
+   • lib/data/services/google_signin_config.dart (⚠️ NEEDS YOUR CLIENT ID)
+   • setup_google_signin.sh (helper script)
+   • get_sha1_alternative.sh (SHA-1 helper)
+   • QUICK_REFERENCE.txt (this file)
+
+✅ Modified:
+   • lib/presentation/pages/one_clinic_sign_in_page.dart (updated Google Sign-In)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ TROUBLESHOOTING                                                           │
+└──────────────────────────────────────────────────────────────────────────┘
+
+❌ "Google Sign-In is not configured"
+   → Update google_signin_config.dart with your Web Client ID
+
+❌ "Developer Error" or "Error 10"
+   → Check SHA-1 matches exactly
+   → Verify package name: com.example.one_clinic_app
+   → Wait 5-10 minutes after creating credentials
+
+❌ "Sign in failed"
+   → Make sure you created BOTH Android AND Web OAuth clients
+   → Verify Web Client ID in code
+
+❌ "API not enabled"
+   → Enable Google Sign-In API in Cloud Console
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ CHECKLIST                                                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+[ ] Get SHA-1 fingerprint
+[ ] Go to console.cloud.google.com
+[ ] Select "for-google-login" project
+[ ] Enable Google Sign-In API
+[ ] Configure OAuth Consent Screen
+[ ] Create Android OAuth Client (with SHA-1)
+[ ] Create Web OAuth Client (copy Client ID)
+[ ] Update google_signin_config.dart
+[ ] Run: flutter clean && flutter pub get
+[ ] Test on Android device/emulator
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 🎯 THE MOST IMPORTANT STEP                                               │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Get your WEB CLIENT ID from Google Cloud Console and add it to:
+    lib/data/services/google_signin_config.dart
+
+WITHOUT THIS, GOOGLE SIGN-IN WILL NOT WORK! ⚠️
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║ For detailed instructions, see: GOOGLE_SIGNIN_ANDROID_SETUP_SUMMARY.md  ║
+╚══════════════════════════════════════════════════════════════════════════╝

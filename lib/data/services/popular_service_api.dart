@@ -8,9 +8,7 @@ class PopularServiceApi {
   final http.Client _client;
 
   Future<List<PopularService>> fetchPopularServices() async {
-    final uri = Uri.parse(
-      'https://system.one-clinic.net:5001/api/admin/populers',
-    );
+    final uri = Uri.parse('https://system.one-clinic.net:5001/api/mobile/home');
     final response = await _client.get(uri);
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw Exception('Failed to fetch popular services');
@@ -37,10 +35,10 @@ class PopularServiceApi {
     }
     if (decoded is Map<String, dynamic>) {
       final candidates = [
+        decoded['populers'],
         decoded['data'],
         decoded['items'],
         decoded['result'],
-        decoded['populers'],
       ];
       for (final candidate in candidates) {
         if (candidate is List) {
