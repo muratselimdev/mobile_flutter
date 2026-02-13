@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/login_request.dart';
 import '../../data/models/register_request.dart';
@@ -106,7 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await authService.logout(token);
       }
     } catch (e) {
-      print('Error during logout: $e');
+      developer.log('Error during logout: $e');
       // Continue with logout even if API call fails
     }
 

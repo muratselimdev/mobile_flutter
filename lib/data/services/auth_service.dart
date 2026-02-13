@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 import '../models/login_request.dart';
 import '../models/login_response.dart';
@@ -11,8 +12,10 @@ class AuthService {
     try {
       final url = Uri.parse('$baseUrl/customer/auth/register');
 
-      print('Registration Request URL: $url');
-      print('Registration Request Body: ${jsonEncode(request.toJson())}');
+      developer.log('Registration Request URL: $url');
+      developer.log(
+        'Registration Request Body: ${jsonEncode(request.toJson())}',
+      );
 
       final response = await http.post(
         url,
@@ -20,8 +23,8 @@ class AuthService {
         body: jsonEncode(request.toJson()),
       );
 
-      print('Registration Response Status: ${response.statusCode}');
-      print('Registration Response Body: ${response.body}');
+      developer.log('Registration Response Status: ${response.statusCode}');
+      developer.log('Registration Response Body: ${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
@@ -34,10 +37,10 @@ class AuthService {
               errorBody['message']?.toString() ??
               errorBody['error']?.toString() ??
               'Registration failed';
-          print('Registration Error: $errorMessage');
+          developer.log('Registration Error: $errorMessage');
           return LoginResponse(success: false, message: errorMessage);
         } catch (e) {
-          print('Error parsing error response: $e');
+          developer.log('Error parsing error response: $e');
           return LoginResponse(
             success: false,
             message: 'Registration failed: ${response.statusCode}',
@@ -45,7 +48,7 @@ class AuthService {
         }
       }
     } catch (e) {
-      print('Registration Exception: $e');
+      developer.log('Registration Exception: $e');
       return LoginResponse(
         success: false,
         message: 'Network error: ${e.toString()}',
@@ -57,8 +60,8 @@ class AuthService {
     try {
       final url = Uri.parse('$baseUrl/customer/auth/login');
 
-      print('Login Request URL: $url');
-      print('Login Request Body: ${jsonEncode(request.toJson())}');
+      developer.log('Login Request URL: $url');
+      developer.log('Login Request Body: ${jsonEncode(request.toJson())}');
 
       final response = await http.post(
         url,
@@ -66,8 +69,8 @@ class AuthService {
         body: jsonEncode(request.toJson()),
       );
 
-      print('Login Response Status: ${response.statusCode}');
-      print('Login Response Body: ${response.body}');
+      developer.log('Login Response Status: ${response.statusCode}');
+      developer.log('Login Response Body: ${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
@@ -81,7 +84,7 @@ class AuthService {
         );
       }
     } catch (e) {
-      print('Login Exception: $e');
+      developer.log('Login Exception: $e');
       return LoginResponse(success: false, message: null);
     }
   }
@@ -90,8 +93,8 @@ class AuthService {
     try {
       final url = Uri.parse('$baseUrl/customer/auth/logout');
 
-      print('Logout Request URL: $url');
-      print(
+      developer.log('Logout Request URL: $url');
+      developer.log(
         'Logout Request Token: ${token != null ? "Token present" : "No token"}',
       );
 
@@ -104,8 +107,8 @@ class AuthService {
 
       final response = await http.post(url, headers: headers);
 
-      print('Logout Response Status: ${response.statusCode}');
-      print('Logout Response Body: ${response.body}');
+      developer.log('Logout Response Status: ${response.statusCode}');
+      developer.log('Logout Response Body: ${response.body}');
 
       // Consider 200, 201, and 401 as successful logout
       // 401 means token already invalid, which is fine for logout
@@ -114,11 +117,11 @@ class AuthService {
           response.statusCode == 401) {
         return true;
       } else {
-        print('Logout failed with status: ${response.statusCode}');
+        developer.log('Logout failed with status: ${response.statusCode}');
         return false;
       }
     } catch (e) {
-      print('Logout Exception: $e');
+      developer.log('Logout Exception: $e');
       // Return true even on exception to ensure user is logged out locally
       return true;
     }

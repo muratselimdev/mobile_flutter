@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/language_group.dart';
@@ -9,12 +10,12 @@ class LanguageGroupService {
     try {
       final url = Uri.parse('$baseUrl/admin/language-groups?isActive=true');
 
-      print('Fetching language groups from: $url');
+      developer.log('Fetching language groups from: $url');
 
       final response = await http.get(url);
 
-      print('Language Groups Response Status: ${response.statusCode}');
-      print('Language Groups Response Body: ${response.body}');
+      developer.log('Language Groups Response Status: ${response.statusCode}');
+      developer.log('Language Groups Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final decoded = jsonDecode(response.body);
@@ -38,11 +39,11 @@ class LanguageGroupService {
             .map((json) => LanguageGroup.fromJson(json as Map<String, dynamic>))
             .toList();
       } else {
-        print('Failed to load language groups: ${response.statusCode}');
+        developer.log('Failed to load language groups: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      print('Error fetching language groups: $e');
+      developer.log('Error fetching language groups: $e');
       return [];
     }
   }

@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,7 +96,7 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
       setState(() {
         _isLoadingLanguages = false;
       });
-      print('Error loading language groups: $e');
+      developer.log('Error loading language groups: $e');
     }
   }
 

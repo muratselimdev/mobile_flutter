@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -55,7 +56,7 @@ class LocationService {
       }
     } catch (e) {
       // Handle error or return null
-      print('Error getting placemark: $e');
+      developer.log('Error getting placemark: $e');
     }
     return null;
   }

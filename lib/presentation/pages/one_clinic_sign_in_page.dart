@@ -557,7 +557,7 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                       }
 
                                       // Navigate to sign-up page with Google account info
-                                      if (!mounted) return;
+                                      if (!context.mounted) return;
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
