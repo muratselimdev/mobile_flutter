@@ -9,6 +9,8 @@ import 'data/services/location_service.dart';
 import 'data/services/auth_service.dart';
 import 'presentation/localization/app_localizations.dart';
 import 'presentation/pages/one_clinic_main_page.dart';
+import 'presentation/pages/one_clinic_sign_in_page.dart';
+import 'presentation/bloc/auth_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,36 +33,49 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<AppLanguageCubit, Locale>(
         builder: (context, locale) {
-          return MaterialApp(
-            locale: locale,
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            onGenerateTitle: (context) => context.loc.t('app.name'),
-            builder: (context, child) {
-              final loc = context.loc;
-              return Directionality(
-                textDirection: loc.isRtl
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
-                child: child ?? const SizedBox.shrink(),
-              );
+          return BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state.status == AuthStatus.unauthenticated) {
+                // Navigate to sign in page when logged out
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (_) => const OneClinicSignInPage(),
+                  ),
+                  (route) => false,
+                );
+              }
             },
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: const Color(0xFF16A34A),
+            child: MaterialApp(
+              locale: locale,
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              onGenerateTitle: (context) => context.loc.t('app.name'),
+              builder: (context, child) {
+                final loc = context.loc;
+                return Directionality(
+                  textDirection: loc.isRtl
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+                  child: child ?? const SizedBox.shrink(),
+                );
+              },
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: const Color(0xFF16A34A),
+                ),
+                useMaterial3: true,
+                fontFamily: GoogleFonts.manrope().fontFamily,
+                textTheme: GoogleFonts.manropeTextTheme(
+                  Theme.of(context).textTheme,
+                ),
               ),
-              useMaterial3: true,
-              fontFamily: GoogleFonts.manrope().fontFamily,
-              textTheme: GoogleFonts.manropeTextTheme(
-                Theme.of(context).textTheme,
-              ),
+              home: const OneClinicMainPage(),
             ),
-            home: const OneClinicMainPage(),
           );
         },
       ),

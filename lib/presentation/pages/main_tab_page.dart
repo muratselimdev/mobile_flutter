@@ -22,27 +22,29 @@ class _MainTabPageState extends State<MainTabPage> {
     _currentIndex = widget.initialIndex;
   }
 
-  final List<Widget> _pages = [
-    const OneClinicHomePage(),
-    const _PlaceholderPage(titleKey: 'footer.search', icon: Icons.search),
-    const _PlaceholderPage(
-      titleKey: 'footer.appointments',
-      icon: Icons.calendar_month,
-    ),
-    const OneClinicProfilePage(),
-  ];
+  void _changeTab(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      OneClinicHomePage(onTabChange: _changeTab),
+      const _PlaceholderPage(titleKey: 'footer.search', icon: Icons.search),
+      const _PlaceholderPage(
+        titleKey: 'footer.appointments',
+        icon: Icons.calendar_month,
+      ),
+      const OneClinicProfilePage(),
+    ];
+
     return Scaffold(
-      body: IndexedStack(index: _currentIndex, children: _pages),
+      body: IndexedStack(index: _currentIndex, children: pages),
       bottomNavigationBar: AppFooter(
         currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onTap: _changeTab,
       ),
     );
   }

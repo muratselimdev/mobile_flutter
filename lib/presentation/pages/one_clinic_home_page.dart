@@ -9,7 +9,7 @@ import '../bloc/auth_bloc.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/auth_event.dart';
 import '../localization/app_localizations.dart';
-import 'one_clinic_sign_in_page.dart';
+import 'one_clinic_edit_profile_page.dart';
 import '../../data/models/popular_service.dart';
 import '../../data/services/popular_service_api.dart';
 import '../../data/models/campaign.dart';
@@ -17,7 +17,9 @@ import '../../data/services/campaign_api.dart';
 import 'one_clinic_campaign_detail_page.dart';
 
 class OneClinicHomePage extends StatefulWidget {
-  const OneClinicHomePage({super.key});
+  final Function(int)? onTabChange;
+
+  const OneClinicHomePage({super.key, this.onTabChange});
 
   @override
   State<OneClinicHomePage> createState() => _OneClinicHomePageState();
@@ -595,22 +597,41 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                 Divider(color: Colors.grey[300]),
                 const SizedBox(height: 16),
 
-                // Profile Info Items
-                if (user?.phone != null)
-                  _ProfileInfoRow(
-                    icon: Icons.phone_outlined,
-                    label: 'Phone',
-                    value: user!.phone!,
+                // Profile Update Button
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(bottomSheetContext);
+                      Navigator.push(
+                        parentContext,
+                        MaterialPageRoute(
+                          builder: (_) => const OneClinicEditProfilePage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.edit_outlined),
+                    label: const Text(
+                      'Profile Update',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      side: const BorderSide(
+                        color: Color(0xFF16A34A),
+                        width: 1.5,
+                      ),
+                      foregroundColor: const Color(0xFF16A34A),
+                    ),
                   ),
-                if (user?.phone != null) const SizedBox(height: 12),
-
-                if (user?.country != null)
-                  _ProfileInfoRow(
-                    icon: Icons.public_outlined,
-                    label: 'Country',
-                    value: user!.country!,
-                  ),
-                if (user?.country != null) const SizedBox(height: 24),
+                ),
+                const SizedBox(height: 12),
 
                 // Exit Button
                 SizedBox(
@@ -660,24 +681,10 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
             child: const Text('Cancel'),
           ),
           TextButton(
-            onPressed: () async {
+            onPressed: () {
               Navigator.pop(dialogContext); // Close dialog
-
-              // Dispatch logout event
+              // Dispatch logout event - BlocListener in main.dart will handle navigation
               context.read<AuthBloc>().add(LogoutRequested());
-
-              // Wait for logout to process
-              await Future.delayed(const Duration(milliseconds: 200));
-
-              // Navigate to sign in page - use root navigator to clear everything
-              if (context.mounted) {
-                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (newContext) => const OneClinicSignInPage(),
-                  ),
-                  (route) => false,
-                );
-              }
             },
             child: const Text('Exit', style: TextStyle(color: Colors.red)),
           ),
@@ -965,55 +972,6 @@ class _PopularServiceCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _ProfileInfoRow extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String value;
-
-  const _ProfileInfoRow({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(icon, color: Colors.grey[700], size: 20),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
