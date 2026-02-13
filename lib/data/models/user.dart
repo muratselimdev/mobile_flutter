@@ -72,4 +72,34 @@ class User {
     final last = lastName?.isNotEmpty == true ? lastName![0] : '';
     return '$first$last'.toUpperCase();
   }
+
+  User copyWith({
+    int? id,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? phone,
+    String? country,
+    int? languageGroupId,
+    String? languageCode,
+    String? profilePicture,
+    bool? isActive,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return User(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      country: country ?? this.country,
+      languageGroupId: languageGroupId ?? this.languageGroupId,
+      languageCode: languageCode ?? this.languageCode,
+      profilePicture: profilePicture ?? this.profilePicture,
+      isActive: isActive ?? this.isActive,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }
