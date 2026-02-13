@@ -27,16 +27,17 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
     super.initState();
     final authState = context.read<AuthBloc>().state;
     final user = authState.user;
-    
+
     _originalEmail = user?.email;
     _emailController = TextEditingController(text: user?.email ?? '');
     _phoneController = TextEditingController(text: user?.phone ?? '');
-    
+
     // Find selected country
     if (user?.country != null) {
       _selectedCountry = CountryData.countries.firstWhere(
-        (c) => c.code.toUpperCase() == user!.country!.toUpperCase() ||
-               c.name.toLowerCase() == user.country!.toLowerCase(),
+        (c) =>
+            c.code.toUpperCase() == user!.country!.toUpperCase() ||
+            c.name.toLowerCase() == user.country!.toLowerCase(),
         orElse: () => CountryData.countries.first,
       );
     }
@@ -87,7 +88,7 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
           try {
             // Sign in with Google to get new account data
             final googleAccount = await GoogleSignIn.instance.authenticate();
-            
+
             if (googleAccount.email == newEmail) {
               // Update email from Google account
               if (!mounted) return;
@@ -131,16 +132,14 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
       // For now, we'll just show success message
 
       if (!mounted) return;
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            context.loc.t('editProfile.snackbarProfileUpdated'),
-          ),
+          content: Text(context.loc.t('editProfile.snackbarProfileUpdated')),
           backgroundColor: const Color(0xFF16A34A),
         ),
       );
-      
+
       Navigator.pop(context);
     } finally {
       if (mounted) {
