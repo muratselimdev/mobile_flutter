@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/services/country_data.dart';
 import '../../data/services/language_group_service.dart';
@@ -528,6 +529,7 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
               child: TextFormField(
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Phone is required';

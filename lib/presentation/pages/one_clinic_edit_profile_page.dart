@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../localization/app_localizations.dart';
 
 class OneClinicEditProfilePage extends StatefulWidget {
@@ -116,7 +117,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    context.loc.t('editProfile.snackbarImagePicker'),
+                                    context.loc.t(
+                                      'editProfile.snackbarImagePicker',
+                                    ),
                                   ),
                                 ),
                               );
@@ -227,6 +230,7 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                     TextField(
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                         hintText: context.loc.t('editProfile.phoneHint'),
                         border: OutlineInputBorder(
@@ -283,7 +287,9 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              context.loc.t('editProfile.snackbarProfileUpdated'),
+                              context.loc.t(
+                                'editProfile.snackbarProfileUpdated',
+                              ),
                             ),
                             backgroundColor: const Color(0xFF16A34A),
                           ),

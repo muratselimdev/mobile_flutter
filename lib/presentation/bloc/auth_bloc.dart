@@ -99,6 +99,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LogoutRequested event,
     Emitter<AuthState> emit,
   ) async {
+    try {
+      // Call backend logout API to delete tokens
+      final token = state.token;
+      if (token != null && token.isNotEmpty) {
+        await authService.logout(token);
+      }
+    } catch (e) {
+      print('Error during logout: $e');
+      // Continue with logout even if API call fails
+    }
+
+    // Clear local auth state
     emit(const AuthState(status: AuthStatus.unauthenticated));
   }
 }

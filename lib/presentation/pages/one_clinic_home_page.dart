@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/location_cubit.dart';
 import '../bloc/location_state.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_state.dart';
+import '../bloc/auth_event.dart';
 import '../localization/app_localizations.dart';
+import 'one_clinic_sign_in_page.dart';
 import '../../data/models/popular_service.dart';
 import '../../data/services/popular_service_api.dart';
 import '../../data/models/campaign.dart';
@@ -165,10 +169,13 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
             icon: const Icon(Icons.notifications_none, color: Colors.black54),
           ),
           const SizedBox(width: 8),
-          const CircleAvatar(
-            radius: 16,
-            backgroundColor: Color(0xFF16A34A),
-            child: Icon(Icons.person, color: Colors.white, size: 18),
+          GestureDetector(
+            onTap: () => _showProfileMenu(context),
+            child: const CircleAvatar(
+              radius: 16,
+              backgroundColor: Color(0xFF16A34A),
+              child: Icon(Icons.person, color: Colors.white, size: 18),
+            ),
           ),
           const SizedBox(width: 12),
         ],
@@ -521,6 +528,163 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
     final count = shuffled.length < 3 ? shuffled.length : 3;
     return shuffled.take(count).toList();
   }
+
+  void _showProfileMenu(BuildContext context) {
+    final parentContext = context;
+    showModalBottomSheet(
+      context: parentContext,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (bottomSheetContext) => BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, authState) {
+          final user = authState.user;
+
+          return Container(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Profile Header
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color(0xFFE8B896),
+                  ),
+                  child: Center(
+                    child: user?.initials != null && user!.initials.isNotEmpty
+                        ? Text(
+                            user.initials,
+                            style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // User Name
+                Text(
+                  user?.fullName ?? 'Guest User',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 4),
+
+                // User Email
+                if (user?.email != null)
+                  Text(
+                    user!.email!,
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+                const SizedBox(height: 24),
+
+                // Divider
+                Divider(color: Colors.grey[300]),
+                const SizedBox(height: 16),
+
+                // Profile Info Items
+                if (user?.phone != null)
+                  _ProfileInfoRow(
+                    icon: Icons.phone_outlined,
+                    label: 'Phone',
+                    value: user!.phone!,
+                  ),
+                if (user?.phone != null) const SizedBox(height: 12),
+
+                if (user?.country != null)
+                  _ProfileInfoRow(
+                    icon: Icons.public_outlined,
+                    label: 'Country',
+                    value: user!.country!,
+                  ),
+                if (user?.country != null) const SizedBox(height: 24),
+
+                // Exit Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(bottomSheetContext); // Close bottom sheet
+                      _handleLogout(parentContext);
+                    },
+                    icon: const Icon(Icons.logout, color: Colors.white),
+                    label: const Text(
+                      'Exit',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _handleLogout(BuildContext context) {
+    // Show confirmation dialog
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Exit App'),
+        content: const Text('Are you sure you want to exit and log out?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(dialogContext); // Close dialog
+
+              // Dispatch logout event
+              context.read<AuthBloc>().add(LogoutRequested());
+
+              // Wait for logout to process
+              await Future.delayed(const Duration(milliseconds: 200));
+
+              // Navigate to sign in page - use root navigator to clear everything
+              if (context.mounted) {
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (newContext) => const OneClinicSignInPage(),
+                  ),
+                  (route) => false,
+                );
+              }
+            },
+            child: const Text('Exit', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _OfferItem {
@@ -801,6 +965,55 @@ class _PopularServiceCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ProfileInfoRow extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const _ProfileInfoRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, color: Colors.grey[700], size: 20),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

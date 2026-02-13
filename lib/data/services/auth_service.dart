@@ -85,4 +85,42 @@ class AuthService {
       return LoginResponse(success: false, message: null);
     }
   }
+
+  Future<bool> logout(String? token) async {
+    try {
+      final url = Uri.parse('$baseUrl/customer/auth/logout');
+
+      print('Logout Request URL: $url');
+      print(
+        'Logout Request Token: ${token != null ? "Token present" : "No token"}',
+      );
+
+      final headers = <String, String>{'Content-Type': 'application/json'};
+
+      // Add authorization header if token exists
+      if (token != null && token.isNotEmpty) {
+        headers['Authorization'] = 'Bearer $token';
+      }
+
+      final response = await http.post(url, headers: headers);
+
+      print('Logout Response Status: ${response.statusCode}');
+      print('Logout Response Body: ${response.body}');
+
+      // Consider 200, 201, and 401 as successful logout
+      // 401 means token already invalid, which is fine for logout
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 401) {
+        return true;
+      } else {
+        print('Logout failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Logout Exception: $e');
+      // Return true even on exception to ensure user is logged out locally
+      return true;
+    }
+  }
 }
