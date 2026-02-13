@@ -19,6 +19,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // Global navigator key to access navigation from anywhere
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -36,8 +40,8 @@ class MyApp extends StatelessWidget {
           return BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state.status == AuthStatus.unauthenticated) {
-                // Navigate to sign in page when logged out
-                Navigator.of(context).pushAndRemoveUntil(
+                // Navigate to sign in page when logged out using navigatorKey
+                navigatorKey.currentState?.pushAndRemoveUntil(
                   MaterialPageRoute(
                     builder: (_) => const OneClinicSignInPage(),
                   ),
@@ -46,6 +50,7 @@ class MyApp extends StatelessWidget {
               }
             },
             child: MaterialApp(
+              navigatorKey: navigatorKey,
               locale: locale,
               supportedLocales: AppLocalizations.supportedLocales,
               localizationsDelegates: const [

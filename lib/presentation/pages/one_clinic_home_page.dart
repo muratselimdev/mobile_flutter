@@ -9,7 +9,6 @@ import '../bloc/auth_bloc.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/auth_event.dart';
 import '../localization/app_localizations.dart';
-import 'one_clinic_edit_profile_page.dart';
 import '../../data/models/popular_service.dart';
 import '../../data/services/popular_service_api.dart';
 import '../../data/models/campaign.dart';
@@ -603,12 +602,8 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                   child: OutlinedButton.icon(
                     onPressed: () {
                       Navigator.pop(bottomSheetContext);
-                      Navigator.push(
-                        parentContext,
-                        MaterialPageRoute(
-                          builder: (_) => const OneClinicEditProfilePage(),
-                        ),
-                      );
+                      // Switch to profile tab (index 3)
+                      widget.onTabChange?.call(3);
                     },
                     icon: const Icon(Icons.edit_outlined),
                     label: const Text(
