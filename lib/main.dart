@@ -4,7 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'presentation/bloc/app_language_cubit.dart';
 import 'presentation/bloc/location_cubit.dart';
+import 'presentation/bloc/auth_bloc.dart';
 import 'data/services/location_service.dart';
+import 'data/services/auth_service.dart';
 import 'presentation/localization/app_localizations.dart';
 import 'presentation/pages/one_clinic_main_page.dart';
 
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
               LocationCubit(locationService: LocationService())
                 ..getCurrentLocation(),
         ),
+        BlocProvider(create: (_) => AuthBloc(authService: AuthService())),
       ],
       child: BlocBuilder<AppLanguageCubit, Locale>(
         builder: (context, locale) {

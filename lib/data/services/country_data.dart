@@ -433,7 +433,7 @@ class CountryData {
       flag: '🇹🇹',
     ),
     const Country(name: 'Tunisia', code: 'TN', dialCode: '+216', flag: '🇹🇳'),
-    const Country(name: 'Turkey', code: 'TR', dialCode: '+90', flag: '🇹🇷'),
+    const Country(name: 'Turkiye', code: 'TR', dialCode: '+90', flag: '🇹🇷'),
     const Country(
       name: 'Turkmenistan',
       code: 'TM',

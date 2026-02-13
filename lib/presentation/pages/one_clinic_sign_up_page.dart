@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/services/auth_service.dart';
 import '../../data/services/country_data.dart';
 import '../../data/services/language_group_service.dart';
 import '../../data/models/country.dart';
@@ -113,184 +112,181 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
   @override
   Widget build(BuildContext context) {
     context.watch<AppLanguageCubit>();
-    return BlocProvider(
-      create: (context) => AuthBloc(authService: AuthService()),
-      child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state.status == AuthStatus.authenticated) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Registration Successful!'),
-                backgroundColor: Color(0xFF16A34A),
-              ),
-            );
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => const MainTabPage()),
-              (route) => false,
-            );
-          } else if (state.status == AuthStatus.error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage ?? 'Registration Failed'),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () => Navigator.pop(context),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state.status == AuthStatus.authenticated) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Registration Successful!'),
+              backgroundColor: Color(0xFF16A34A),
             ),
+          );
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => const MainTabPage()),
+            (route) => false,
+          );
+        } else if (state.status == AuthStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage ?? 'Registration Failed'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.pop(context),
           ),
-          body: BlocBuilder<AuthBloc, AuthState>(
-            builder: (context, state) {
-              return SingleChildScrollView(
-                padding: const EdgeInsets.all(24.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        'Create Account',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF16A34A),
-                        ),
-                        textAlign: TextAlign.center,
+        ),
+        body: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Create Account',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF16A34A),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Sign up to get started',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 32),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Sign up to get started',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32),
 
-                      // First Name
-                      _buildTextField(
-                        controller: _firstNameController,
-                        label: 'First Name',
-                        validator: (value) => value?.isEmpty ?? true
-                            ? 'First Name is required'
-                            : null,
-                      ),
-                      const SizedBox(height: 16),
+                    // First Name
+                    _buildTextField(
+                      controller: _firstNameController,
+                      label: 'First Name',
+                      validator: (value) => value?.isEmpty ?? true
+                          ? 'First Name is required'
+                          : null,
+                    ),
+                    const SizedBox(height: 16),
 
-                      // Last Name
-                      _buildTextField(
-                        controller: _lastNameController,
-                        label: 'Last Name',
-                        validator: (value) => value?.isEmpty ?? true
-                            ? 'Last Name is required'
-                            : null,
-                      ),
-                      const SizedBox(height: 16),
+                    // Last Name
+                    _buildTextField(
+                      controller: _lastNameController,
+                      label: 'Last Name',
+                      validator: (value) => value?.isEmpty ?? true
+                          ? 'Last Name is required'
+                          : null,
+                    ),
+                    const SizedBox(height: 16),
 
-                      // Email
-                      _buildTextField(
-                        controller: _emailController,
-                        label: 'Email',
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email is required';
-                          }
-                          if (!value.contains('@')) {
-                            return 'Invalid email format';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                    // Email
+                    _buildTextField(
+                      controller: _emailController,
+                      label: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email is required';
+                        }
+                        if (!value.contains('@')) {
+                          return 'Invalid email format';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
 
-                      // Country
-                      _buildCountryDropdown(),
-                      const SizedBox(height: 16),
+                    // Country
+                    _buildCountryDropdown(),
+                    const SizedBox(height: 16),
 
-                      // Phone Number with Country Code
-                      _buildPhoneField(),
-                      const SizedBox(height: 16),
+                    // Phone Number with Country Code
+                    _buildPhoneField(),
+                    const SizedBox(height: 16),
 
-                      // Language Selector
-                      _buildLanguageDropdown(),
-                      const SizedBox(height: 16),
+                    // Language Selector
+                    _buildLanguageDropdown(),
+                    const SizedBox(height: 16),
 
-                      // Password
-                      _buildTextField(
-                        controller: _passwordController,
-                        label: 'Password',
-                        obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Password is required';
-                          }
-                          if (value.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                    // Password
+                    _buildTextField(
+                      controller: _passwordController,
+                      label: 'Password',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password is required';
+                        }
+                        if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
 
-                      // Confirm Password
-                      _buildTextField(
-                        controller: _confirmPasswordController,
-                        label: 'Confirm Password',
-                        obscureText: true,
-                        validator: (value) {
-                          if (value != _passwordController.text) {
-                            return 'Passwords do not match';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 32),
+                    // Confirm Password
+                    _buildTextField(
+                      controller: _confirmPasswordController,
+                      label: 'Confirm Password',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value != _passwordController.text) {
+                          return 'Passwords do not match';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 32),
 
-                      // Sign Up Button
-                      SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: state.status == AuthStatus.loading
-                              ? null
-                              : () => _submitRegistration(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF16A34A),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                    // Sign Up Button
+                    SizedBox(
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: state.status == AuthStatus.loading
+                            ? null
+                            : () => _submitRegistration(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF16A34A),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          child: state.status == AuthStatus.loading
-                              ? const SizedBox(
-                                  height: 24,
-                                  width: 24,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : const Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
                         ),
+                        child: state.status == AuthStatus.loading
+                            ? const SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -612,7 +608,7 @@ class _OneClinicSignUpPageState extends State<OneClinicSignUpPage> {
                 ),
               )
             : DropdownButtonFormField<LanguageGroup>(
-                value: _selectedLanguageGroup,
+                initialValue: _selectedLanguageGroup,
                 isExpanded: true,
                 decoration: InputDecoration(
                   filled: true,
