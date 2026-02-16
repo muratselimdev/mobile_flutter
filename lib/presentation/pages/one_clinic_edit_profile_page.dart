@@ -397,7 +397,7 @@ class _OneClinicEditProfilePageState extends State<OneClinicEditProfilePage> {
                     ),
                     const SizedBox(height: 8),
                     DropdownButtonFormField<Country>(
-                      value: _selectedCountry,
+                      initialValue: _selectedCountry,
                       decoration: InputDecoration(
                         hintText: 'Select Country',
                         border: OutlineInputBorder(
