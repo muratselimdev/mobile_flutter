@@ -606,30 +606,55 @@ class _OneClinicSignInPageState extends State<OneClinicSignInPage> {
                                       context,
                                     );
                                     try {
-                                      await SignInWithApple.getAppleIDCredential(
-                                        scopes: [
-                                          AppleIDAuthorizationScopes.email,
-                                          AppleIDAuthorizationScopes.fullName,
-                                        ],
-                                      );
-                                      // Use credential here to authenticate with backend
-                                      messenger.showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            'Apple Sign In Success (Demo)',
+                                      final credential =
+                                          await SignInWithApple.getAppleIDCredential(
+                                            scopes: [
+                                              AppleIDAuthorizationScopes.email,
+                                              AppleIDAuthorizationScopes
+                                                  .fullName,
+                                            ],
+                                          );
+
+                                      // Extract user information
+                                      final String? email = credential.email;
+                                      final String? givenName =
+                                          credential.givenName;
+                                      final String? familyName =
+                                          credential.familyName;
+
+                                      // Navigate to sign-up page with Apple account info
+                                      if (!context.mounted) return;
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => OneClinicSignUpPage(
+                                            firstName: givenName,
+                                            lastName: familyName,
+                                            email: email,
                                           ),
-                                          backgroundColor: Color(0xFF16A34A),
                                         ),
                                       );
                                     } catch (error) {
-                                      messenger.showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Apple Sign In Failed: $error',
+                                      final errorMessage = error.toString();
+
+                                      // Check for user cancellation
+                                      final isCancelled =
+                                          errorMessage.contains('1001') ||
+                                          errorMessage.contains('CANCELED');
+
+                                      if (!isCancelled) {
+                                        messenger.showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Apple Sign In failed: $errorMessage',
+                                            ),
+                                            backgroundColor: Colors.red,
+                                            duration: const Duration(
+                                              seconds: 4,
+                                            ),
                                           ),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
+                                        );
+                                      }
                                     }
                                   },
                                   icon: const Icon(
