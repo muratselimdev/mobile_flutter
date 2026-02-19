@@ -245,9 +245,17 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                           _isDropdownExpanded = !_isDropdownExpanded;
                         });
                       } else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => OneClinicCategoryItemsPage(
+                              categoryId: category.id,
+                              categoryName: category.name,
+                            ),
+                          ),
+                        );
                         setState(() {
                           _selectedCategoryIndex = index;
-                          _isDropdownExpanded = true;
+                          _isDropdownExpanded = false;
                         });
                       }
                     },
