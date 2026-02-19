@@ -109,7 +109,7 @@ class _OneClinicCategoryItemDetailPageState
           : ListView.separated(
               padding: const EdgeInsets.all(16),
               itemCount: _details.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 16),
+              separatorBuilder: (_, _) => const SizedBox(height: 16),
               itemBuilder: (context, index) =>
                   _DetailCard(detail: _details[index]),
             ),
@@ -162,7 +162,7 @@ class _DetailCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -182,7 +182,7 @@ class _DetailCard extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => _imagePlaceholder(rounded: true),
+                errorBuilder: (_, _, _) => _imagePlaceholder(rounded: true),
               ),
             )
           else
