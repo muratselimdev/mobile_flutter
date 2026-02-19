@@ -28,12 +28,15 @@ class PopularService {
           'icon',
         ]) ??
         '';
+    // API stores rating * 1000 (e.g. 4700 = 4.7 stars)
+    final rawRating = _readDouble(map, ['rating', 'rate']) ?? 4800.0;
+    final normalizedRating = rawRating > 100 ? rawRating / 1000.0 : rawRating;
     return PopularService(
       title: _readString(map, ['title', 'name', 'serviceName']) ?? '',
       provider: _readString(map, ['provider', 'clinic', 'clinicName']) ?? '',
-      rating: _readDouble(map, ['rating', 'rate']) ?? 4.8,
-      reviews: _readInt(map, ['reviews', 'reviewCount']) ?? 85,
-      price: _readString(map, ['price', 'cost', 'fee']) ?? '',
+      rating: double.parse(normalizedRating.toStringAsFixed(1)),
+      reviews: _readInt(map, ['reviews', 'reviewCount']) ?? 0,
+      price: _readPrice(map) ?? '',
       imageUrl: _normalizeImageUrl(rawImage, baseUrl: baseUrl),
     );
   }
@@ -96,6 +99,25 @@ class PopularService {
         if (parsed != null) {
           return parsed;
         }
+      }
+    }
+    return null;
+  }
+
+  static String? _readPrice(Map<String, dynamic> map) {
+    for (final key in ['price', 'cost', 'fee']) {
+      final value = map[key];
+      if (value is String && value.trim().isNotEmpty) return value;
+      if (value is num) {
+        final intVal = value.toInt();
+        // Format with thousands separator
+        final str = intVal.toString();
+        final buf = StringBuffer();
+        for (int i = 0; i < str.length; i++) {
+          if (i > 0 && (str.length - i) % 3 == 0) buf.write(',');
+          buf.write(str[i]);
+        }
+        return buf.toString();
       }
     }
     return null;

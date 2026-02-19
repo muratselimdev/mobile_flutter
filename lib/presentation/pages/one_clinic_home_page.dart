@@ -13,7 +13,10 @@ import '../../data/models/popular_service.dart';
 import '../../data/services/popular_service_api.dart';
 import '../../data/models/campaign.dart';
 import '../../data/services/campaign_api.dart';
+import '../../data/models/category.dart';
+import '../../data/services/category_api.dart';
 import 'one_clinic_campaign_detail_page.dart';
+import 'one_clinic_category_items_page.dart';
 
 class OneClinicHomePage extends StatefulWidget {
   final Function(int)? onTabChange;
@@ -27,12 +30,13 @@ class OneClinicHomePage extends StatefulWidget {
 class _OneClinicHomePageState extends State<OneClinicHomePage> {
   int _selectedCategoryIndex = 0;
   bool _isDropdownExpanded = true;
-  // int _currentTabIndex = 0; // REPLACED: Removed logic for internal tab index
   final PopularServiceApi _popularServiceApi = PopularServiceApi();
   final CampaignApi _campaignApi = CampaignApi();
+  final CategoryApi _categoryApi = CategoryApi();
   final List<PopularService> _popularPool = [];
   final List<PopularService> _visiblePopularServices = [];
   final List<_OfferItem> _offers = [];
+  List<Category> _categories = [];
   Timer? _popularRefreshTimer;
   Timer? _popularShuffleTimer;
   Timer? _campaignRefreshTimer;
@@ -58,8 +62,24 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   }
 
   Future<void> _fetchInitialData() async {
-    // Run both API calls in parallel instead of sequentially
-    await Future.wait([_fetchCampaigns(), _fetchPopularServices()]);
+    // Run all API calls in parallel
+    await Future.wait([
+      _fetchCampaigns(),
+      _fetchPopularServices(),
+      _fetchCategories(),
+    ]);
+  }
+
+  Future<void> _fetchCategories() async {
+    try {
+      final fetched = await _categoryApi.fetchCategories();
+      if (!mounted) return;
+      setState(() {
+        _categories = fetched;
+      });
+    } catch (_) {
+      // fallback: do nothing, keep _categories empty
+    }
   }
 
   @override
@@ -74,38 +94,14 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
   Widget build(BuildContext context) {
     final loc = context.loc;
 
-    final categories = <_Category>[
-      _Category(
-        name: loc.t('categories.names.all'),
-        icon: Icons.dashboard_outlined,
-        items: loc.list('categories.items.all'),
-      ),
-      _Category(
-        name: loc.t('categories.names.hairTransplant'),
-        icon: Icons.content_cut_outlined,
-        items: loc.list('categories.items.hairTransplant'),
-      ),
-      _Category(
-        name: loc.t('categories.names.dentalAesthetic'),
-        icon: Icons.favorite_outline,
-        items: loc.list('categories.items.dentalAesthetic'),
-      ),
-      _Category(
-        name: loc.t('categories.names.skinAesthetic'),
-        icon: Icons.spa_outlined,
-        items: loc.list('categories.items.skinAesthetic'),
-      ),
-      _Category(
-        name: loc.t('categories.names.eyeSurgery'),
-        icon: Icons.visibility_outlined,
-        items: loc.list('categories.items.eyeSurgery'),
-      ),
-      _Category(
-        name: loc.t('categories.names.orthopedics'),
-        icon: Icons.directions_walk_outlined,
-        items: loc.list('categories.items.orthopedics'),
-      ),
-    ];
+    // Build categories from API, fallback to old local if empty
+    final categories = _categories.isNotEmpty
+        ? [
+            // All button
+            Category(id: -1, name: 'All', icon: null),
+            ..._categories,
+          ]
+        : <Category>[Category(id: -1, name: 'All', icon: null)];
 
     final offers = _offers.isNotEmpty ? _offers : _buildLocalOffers(loc);
 
@@ -130,38 +126,6 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                 fontSize: 18,
               ),
             ),
-            BlocBuilder<LocationCubit, LocationState>(
-              builder: (context, state) {
-                if (state.status == LocationStatus.success &&
-                    state.placemark != null) {
-                  final place = state.placemark!;
-                  final locationText = [
-                    place.locality,
-                    place.country,
-                  ].where((e) => e != null && e.isNotEmpty).join(', ');
-
-                  return Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on,
-                        size: 14,
-                        color: Color(0xFF16A34A),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        locationText,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
           ],
         ),
         actions: [
@@ -185,31 +149,52 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.black12),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on_outlined,
-                        size: 16,
-                        color: Colors.black54,
+            BlocBuilder<LocationCubit, LocationState>(
+              builder: (context, state) {
+                String locationText = '';
+                if (state.status == LocationStatus.success &&
+                    state.placemark != null) {
+                  final place = state.placemark!;
+                  locationText = [
+                    place.locality,
+                    place.country,
+                  ].where((e) => e != null && e.isNotEmpty).join(', ');
+                }
+                return Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
                       ),
-                      const SizedBox(width: 6),
-                      Text(loc.t('home.location')),
-                    ],
-                  ),
-                ),
-              ],
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.black12),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_outlined,
+                            size: 16,
+                            color: Colors.black54,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            locationText.isNotEmpty
+                                ? locationText
+                                : loc.t('home.location'),
+                            style: const TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 16),
             Text(
@@ -256,13 +241,13 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                   return GestureDetector(
                     onTap: () {
                       if (index == 0) {
-                        // Toggle dropdown when clicking first button
                         setState(() {
                           _isDropdownExpanded = !_isDropdownExpanded;
                         });
                       } else {
                         setState(() {
                           _selectedCategoryIndex = index;
+                          _isDropdownExpanded = true;
                         });
                       }
                     },
@@ -286,7 +271,7 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
-                            category.icon,
+                            Icons.category,
                             size: 18,
                             color: (index == 0 || isActive)
                                 ? Colors.white
@@ -324,47 +309,77 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
             ),
             const SizedBox(height: 24),
             // Category items list - toggle with dropdown
-            if (_isDropdownExpanded) ...[
-              Text(
-                categories[_selectedCategoryIndex].name,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Column(
-                children: categories[_selectedCategoryIndex].items.map((item) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.black.withValues(alpha: 0.05),
-                        ),
-                      ),
+            if (_isDropdownExpanded && categories.isNotEmpty) ...[
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.06),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87,
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    for (int i = 1; i < categories.length; i++)
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => OneClinicCategoryItemsPage(
+                                categoryId: categories[i].id,
+                                categoryName: categories[i].name,
+                              ),
                             ),
+                          );
+                          setState(() {
+                            _selectedCategoryIndex = i;
+                            _isDropdownExpanded = false;
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 14,
+                            horizontal: 18,
+                          ),
+                          decoration: BoxDecoration(
+                            border: i < categories.length - 1
+                                ? const Border(
+                                    bottom: BorderSide(
+                                      color: Color(0xFFE5E7EB),
+                                      width: 1,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  categories[i].name,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_right,
+                                color: Colors.grey,
+                                size: 22,
+                              ),
+                            ],
                           ),
                         ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: Colors.grey[400],
-                          size: 20,
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                      ),
+                  ],
+                ),
               ),
               const SizedBox(height: 24),
             ],
@@ -472,21 +487,21 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
     }
   }
 
-  _OfferItem _mapCampaignToOffer(Campaign campaign) {
-    return _OfferItem(
-      description: campaign.description,
-      title: campaign.title,
-      discountRate: campaign.discountRate,
-      imageUrl: campaign.imageUrl,
-    );
-  }
-
   void _setOffers(List<_OfferItem> offers) {
     setState(() {
       _offers
         ..clear()
         ..addAll(offers);
     });
+  }
+
+  _OfferItem _mapCampaignToOffer(Campaign campaign) {
+    return _OfferItem(
+      title: campaign.title,
+      description: campaign.description,
+      discountRate: campaign.discountRate,
+      imageUrl: campaign.imageUrl,
+    );
   }
 
   Future<void> _fetchPopularServices() async {
@@ -579,7 +594,6 @@ class _OneClinicHomePageState extends State<OneClinicHomePage> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -700,18 +714,6 @@ class _OfferItem {
     required this.title,
     required this.discountRate,
     required this.imageUrl,
-  });
-}
-
-class _Category {
-  final String name;
-  final IconData icon;
-  final List<String> items;
-
-  const _Category({
-    required this.name,
-    required this.icon,
-    required this.items,
   });
 }
 
